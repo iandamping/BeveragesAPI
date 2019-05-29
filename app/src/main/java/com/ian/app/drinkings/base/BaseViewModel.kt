@@ -21,5 +21,4 @@ abstract class BaseViewModel : ViewModel() {
     protected fun disposeComposite() {
         if (!compose.isDisposed) compose.dispose()
     }
-
 }

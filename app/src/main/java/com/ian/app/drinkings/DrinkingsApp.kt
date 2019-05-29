@@ -15,6 +15,6 @@ Github = https://github.com/iandamping
 class DrinkingsApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, listOf(networkModule, databaseModule, allRepoModule, allViewmodelModule))
+        startKoin(this, listOf(networkModule, databaseModule, allViewmodelModule, allRepoModule))
     }
 }

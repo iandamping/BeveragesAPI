@@ -1,6 +1,6 @@
 package com.ian.app.drinkings.di
 
-import com.ian.app.drinkings.data.viewmodel.MargaritaViewModel
+import com.ian.app.drinkings.data.viewmodel.GetAllDrinksCoroutineViewModel
 import org.koin.dsl.module.module
 
 /**
@@ -10,6 +10,7 @@ Github = https://github.com/iandamping
  */
 object ViewmodelModule {
     val allViewmodelModule = module {
-        factory { MargaritaViewModel(get(), get()) }
+        factory { GetAllDrinksCoroutineViewModel(get(), get()) }
+//        factory { GetAllDrinksViewModel(get(),get()) }
     }
 }

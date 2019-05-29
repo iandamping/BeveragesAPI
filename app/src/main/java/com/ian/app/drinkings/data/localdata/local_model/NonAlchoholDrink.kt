@@ -1,17 +1,16 @@
-package com.ian.app.drinkings.data.localdata
+package com.ian.app.drinkings.data.localdata.local_model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+
 /**
  *
-Created by Ian Damping on 25/05/2019.
+Created by Ian Damping on 29/05/2019.
 Github = https://github.com/iandamping
  */
-data class CocktailDrink(@field:SerializedName("drinks") val cocktailDrinks: List<Drink>?) {
-
-    @Entity(tableName = "local_drink")
-    data class Drink(
+@Entity(tableName = "non_alchohol_drink")
+data class NonAlchoholDrink(
         @PrimaryKey(autoGenerate = true) var local_drink_id: Int?,
         @field:SerializedName("idDrink") val idMeal: String?,
         @field:SerializedName("strDrink") val strMeal: String?,
@@ -49,5 +48,5 @@ data class CocktailDrink(@field:SerializedName("drinks") val cocktailDrinks: Lis
         @field:SerializedName("strMeasure13") val strMeasure13: String?,
         @field:SerializedName("strMeasure14") val strMeasure14: String?,
         @field:SerializedName("strMeasure15") val strMeasure15: String?
-    )
+) {
 }

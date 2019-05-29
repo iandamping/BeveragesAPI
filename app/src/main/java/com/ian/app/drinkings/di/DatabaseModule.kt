@@ -14,6 +14,7 @@ object DatabaseModule {
         // Room Database instance
         single { Room.databaseBuilder(get(), MyDrinkingDatabase::class.java, "DrinkingLocalData").build() }
         // localDao instance (get instance from MyDrinkingDatabase)
-        single { get<MyDrinkingDatabase>().drinkDao() }
+        single { get<MyDrinkingDatabase>().alchoholDrinkDao() }
+        single { get<MyDrinkingDatabase>().nonAlchoholDrinkDao() }
     }
 }
