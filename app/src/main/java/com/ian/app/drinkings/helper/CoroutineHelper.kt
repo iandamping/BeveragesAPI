@@ -17,9 +17,9 @@ inline fun CoroutineScope.doSomethingWithIOScope(crossinline heavyFunction: susp
 }
 
 inline fun <reified T> CoroutineScope.doSomethingWithDeferred(
-    deferred: Deferred<T>,
-    crossinline onSuccess: (T) -> Unit,
-    crossinline onFailed: (String) -> Unit
+        deferred: Deferred<T>,
+        crossinline onSuccess: (T) -> Unit,
+        crossinline onFailed: (String) -> Unit
 ) {
     this.launch {
         try {
@@ -31,9 +31,9 @@ inline fun <reified T> CoroutineScope.doSomethingWithDeferred(
 }
 
 inline fun <reified T, U> CoroutineScope.deferredPair(
-    deferredSource1: Pair<Deferred<T>, Deferred<U>>,
-    crossinline onSuccess: (T, U) -> Unit,
-    crossinline onFailed: (String) -> Unit
+        deferredSource1: Pair<Deferred<T>, Deferred<U>>,
+        crossinline onSuccess: (T, U) -> Unit,
+        crossinline onFailed: (String) -> Unit
 ) {
     this.launch {
         try {
@@ -45,9 +45,9 @@ inline fun <reified T, U> CoroutineScope.deferredPair(
 }
 
 inline fun <reified T, U, R> CoroutineScope.deferredTriple(
-    deferredSource: Triple<Deferred<T>, Deferred<U>, Deferred<R>>,
-    crossinline onSuccess: (T, U, R) -> Unit,
-    crossinline onFailed: (String) -> Unit
+        deferredSource: Triple<Deferred<T>, Deferred<U>, Deferred<R>>,
+        crossinline onSuccess: (T, U, R) -> Unit,
+        crossinline onFailed: (String) -> Unit
 ) {
     this.launch {
         try {

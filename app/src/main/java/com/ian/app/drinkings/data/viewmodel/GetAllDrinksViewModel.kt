@@ -3,7 +3,7 @@ package com.ian.app.drinkings.data.viewmodel
 import com.ian.app.drinkings.api.ApiInterface
 import com.ian.app.drinkings.base.BaseViewModel
 import com.ian.app.drinkings.base.OnFailedGetData
-import com.ian.app.drinkings.base.OnGetData
+import com.ian.app.drinkings.base.OnGetDrinksData
 import com.ian.app.drinkings.base.OnSuccessGetData
 import com.ian.app.drinkings.helper.deferredTriple
 
@@ -17,12 +17,12 @@ class GetAllDrinksViewModel(private val api: ApiInterface) : BaseViewModel() {
     fun getDrinksData() {
         liveDataState.value = OnSuccessGetData(false)
         uiScope.deferredTriple(
-            Triple(api.getNonAlchoholicDrinks(), api.getAlchoholicDrinks(), api.getRandomDrink()),
-            { first, second, third ->
-                liveDataState.value = OnSuccessGetData(true)
-                liveDataState.value =
-                    OnGetData(Triple(first.cocktailDrinks, second.cocktailDrinks, third.cocktailDrinks))
-            }) {
+                Triple(api.getNonAlchoholicDrinks(), api.getAlchoholicDrinks(), api.getRandomDrink()),
+                { first, second, third ->
+                    liveDataState.value = OnSuccessGetData(true)
+                    liveDataState.value =
+                            OnGetDrinksData(Triple(first.cocktailDrinks, second.cocktailDrinks, third.cocktailDrinks))
+                }) {
             liveDataState.value = OnSuccessGetData(true)
             liveDataState.value = OnFailedGetData(it)
         }
