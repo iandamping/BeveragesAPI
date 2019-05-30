@@ -29,13 +29,26 @@ inline fun <reified T> CoroutineScope.doSomethingWithDeferred(deferred: Deferred
     }
 }
 
-inline fun <reified T, U> CoroutineScope.doSomethingWithDeferredPair(deferredSource1: Pair<Deferred<T>, Deferred<U>>,
-                                                                     crossinline onSuccess: (T, U) -> Unit,
-                                                                     crossinline onFailed: (String) -> Unit
+inline fun <reified T, U> CoroutineScope.deferredPair(deferredSource1: Pair<Deferred<T>, Deferred<U>>,
+                                                      crossinline onSuccess: (T, U) -> Unit,
+                                                      crossinline onFailed: (String) -> Unit
 ) {
     this.launch {
         try {
             onSuccess(deferredSource1.first.await(), deferredSource1.second.await())
+        } catch (t: Throwable) {
+            onFailed(t.localizedMessage)
+        }
+    }
+}
+
+inline fun <reified T, U,R> CoroutineScope.deferredTriple(deferredSource: Triple<Deferred<T>, Deferred<U>,Deferred<R>>,
+                                                      crossinline onSuccess: (T, U,R) -> Unit,
+                                                      crossinline onFailed: (String) -> Unit
+) {
+    this.launch {
+        try {
+            onSuccess(deferredSource.first.await(), deferredSource.second.await(),deferredSource.third.await())
         } catch (t: Throwable) {
             onFailed(t.localizedMessage)
         }

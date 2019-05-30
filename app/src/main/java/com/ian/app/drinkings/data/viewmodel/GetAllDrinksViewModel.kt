@@ -9,7 +9,7 @@ import com.ian.app.drinkings.base.OnSuccessGetData
 import com.ian.app.drinkings.data.localdata.local_model.AlchoholDrink
 import com.ian.app.drinkings.data.localdata.MyDrinkingDatabase
 import com.ian.app.drinkings.data.localdata.local_model.NonAlchoholDrink
-import com.ian.app.drinkings.data.model.GenericViewModelZipperPair
+import com.ian.app.drinkings.data.viewmodel.model.GenericViewModelZipperPair
 import com.ian.app.drinkings.data.repo.AllDrinksRepo
 import com.ian.app.drinkings.helper.asyncRxExecutor
 import com.ian.app.drinkings.helper.customViewModelFactoriesHelper

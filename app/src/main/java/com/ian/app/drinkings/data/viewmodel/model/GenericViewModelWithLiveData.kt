@@ -1,4 +1,4 @@
-package com.ian.app.drinkings.data.model
+package com.ian.app.drinkings.data.viewmodel.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

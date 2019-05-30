@@ -10,9 +10,9 @@ import com.ian.app.drinkings.base.OnSuccessGetData
 import com.ian.app.drinkings.data.localdata.local_model.AlchoholDrink
 import com.ian.app.drinkings.data.localdata.MyDrinkingDatabase
 import com.ian.app.drinkings.data.localdata.local_model.NonAlchoholDrink
-import com.ian.app.drinkings.data.model.GenericViewModelZipperPair
+import com.ian.app.drinkings.data.viewmodel.model.GenericViewModelZipperPair
 import com.ian.app.drinkings.helper.customViewModelFactoriesHelper
-import com.ian.app.drinkings.helper.doSomethingWithDeferredPair
+import com.ian.app.drinkings.helper.deferredPair
 import com.ian.app.drinkings.helper.doSomethingWithIOScope
 
 /**
@@ -35,7 +35,7 @@ class GetAllDrinksCoroutineViewModel(private val api: ApiInterface, private val 
                         liveDataState.value = OnGetData<Pair<List<AlchoholDrink>?, List<NonAlchoholDrink>?>>(dataFromLocal)
                     }
                     if (dataFromLocal.first.isEmpty() && dataFromLocal.second.isEmpty()) {
-                        uiScope.doSomethingWithDeferredPair(Pair(api.getNonAlchoholicDrinksDef(), api.getAlchoholicDrinksDef()), { first, second ->
+                        uiScope.deferredPair(Pair(api.getNonAlchoholicDrinksDef(), api.getAlchoholicDrinksDef()), { first, second ->
                             uiScope.doSomethingWithIOScope {
                                 db.nonAlchoholDrinkDao().insertLocalData(first.cocktailDrinks)
                                 db.alchoholDrinkDao().insertLocalData(second.cocktailDrinks)
