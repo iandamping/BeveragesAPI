@@ -3,14 +3,13 @@ package com.ian.app.drinkings.ui.activity.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ian.app.drinkings.R
-import com.ian.app.drinkings.data.localdata.local_model.AlchoholDrink
-import com.ian.app.drinkings.data.localdata.local_model.NonAlchoholDrink
-import com.ian.app.drinkings.data.viewmodel.GetAllDrinksCoroutineViewModel
+import com.ian.app.drinkings.data.model.Drinks
+import com.ian.app.drinkings.data.viewmodel.GetAllDrinksViewModel
 import com.ian.app.drinkings.helper.logE
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), MainView {
-    private val vm: GetAllDrinksCoroutineViewModel by viewModel()
+    private val vm: GetAllDrinksViewModel by viewModel()
     private lateinit var presenter: MainPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,12 +20,15 @@ class MainActivity : AppCompatActivity(), MainView {
         }
     }
 
-    override fun getDrinksData(data: Pair<List<AlchoholDrink>?, List<NonAlchoholDrink>?>) {
+    override fun getDrinksData(data: Triple<List<Drinks>?, List<Drinks>?, List<Drinks>?>) {
         data.first?.forEach {
             logE(it.idMeal + " Get the first fuckin data")
         }
         data.second?.forEach {
             logE(it.idMeal + " Get the second fuckin data")
+        }
+        data.third?.forEach {
+            logE(it.idMeal + " Get the third fuckin data")
         }
     }
 

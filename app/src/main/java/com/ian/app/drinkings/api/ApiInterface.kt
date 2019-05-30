@@ -1,10 +1,8 @@
 package com.ian.app.drinkings.api
 
-import com.ian.app.drinkings.data.localdata.local_model.AlchoholDrink
-import com.ian.app.drinkings.data.localdata.local_model.GeneralDrinkData
-import com.ian.app.drinkings.data.localdata.local_model.NonAlchoholDrink
+import com.ian.app.drinkings.data.model.Drinks
+import com.ian.app.drinkings.data.model.GeneralDrinkData
 import com.ian.app.drinkings.di.NetworkingModule
-import io.reactivex.Observable
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 
@@ -15,16 +13,19 @@ Github = https://github.com/iandamping
  */
 
 interface ApiInterface {
+//
+//    @GET(NetworkingModule.getAlcoholic)
+//    fun getAlchoholicDrinks(): Observable<GeneralDrinkData<AlchoholDrink>>
+//
+//    @GET(NetworkingModule.getNonAlcoholic)
+//    fun getNonAlchoholicDrinks(): Observable<GeneralDrinkData<NonAlchoholDrink>>
 
     @GET(NetworkingModule.getAlcoholic)
-    fun getAlchoholicDrinks(): Observable<GeneralDrinkData<AlchoholDrink>>
+    fun getAlchoholicDrinks(): Deferred<GeneralDrinkData<Drinks>>
 
     @GET(NetworkingModule.getNonAlcoholic)
-    fun getNonAlchoholicDrinks(): Observable<GeneralDrinkData<NonAlchoholDrink>>
+    fun getNonAlchoholicDrinks(): Deferred<GeneralDrinkData<Drinks>>
 
-    @GET(NetworkingModule.getAlcoholic)
-    fun getAlchoholicDrinksDef(): Deferred<GeneralDrinkData<AlchoholDrink>>
-
-    @GET(NetworkingModule.getNonAlcoholic)
-    fun getNonAlchoholicDrinksDef(): Deferred<GeneralDrinkData<NonAlchoholDrink>>
+    @GET(NetworkingModule.getRandomDrink)
+    fun getRandomDrink(): Deferred<GeneralDrinkData<Drinks>>
 }

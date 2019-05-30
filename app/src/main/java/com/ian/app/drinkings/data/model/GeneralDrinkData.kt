@@ -1,4 +1,4 @@
-package com.ian.app.drinkings.data.localdata.local_model
+package com.ian.app.drinkings.data.model
 
 import com.google.gson.annotations.SerializedName
 

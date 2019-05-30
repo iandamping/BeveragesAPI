@@ -29,8 +29,8 @@ inline fun <reified T : ViewModel> FragmentActivity.activityGetViewModelHelper(c
 }
 
 inline fun <reified T : ViewModel> FragmentActivity.customViewModelFactoriesHelper(
-        crossinline factory: () -> T,
-        body: T.() -> Unit
+    crossinline factory: () -> T,
+    body: T.() -> Unit
 ): T {
     val vm = activityGetViewModelHelper(factory)
     vm.body()

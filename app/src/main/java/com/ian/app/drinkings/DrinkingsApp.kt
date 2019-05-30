@@ -1,9 +1,7 @@
 package com.ian.app.drinkings
 
 import android.app.Application
-import com.ian.app.drinkings.di.DatabaseModule.databaseModule
 import com.ian.app.drinkings.di.NetworkingModule.networkModule
-import com.ian.app.drinkings.di.RepositoryModule.allRepoModule
 import com.ian.app.drinkings.di.ViewmodelModule.allViewmodelModule
 import org.koin.android.ext.android.startKoin
 
@@ -15,6 +13,6 @@ Github = https://github.com/iandamping
 class DrinkingsApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, listOf(networkModule, databaseModule, allViewmodelModule, allRepoModule))
+        startKoin(this, listOf(networkModule, allViewmodelModule))
     }
 }
