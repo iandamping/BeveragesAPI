@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ian.app.drinkings.R
 import com.ian.app.drinkings.data.model.Drinks
 import com.ian.app.drinkings.data.viewmodel.GetAllDrinksViewModel
-import com.ian.app.drinkings.helper.*
-import com.ian.app.drinkings.helper.Constant.intentKeyToDetail
+import com.ian.app.drinkings.helper.BeverageConstant.alchoholState
+import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDetail
+import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDiscover
+import com.ian.app.drinkings.helper.BeverageConstant.nonAlchoholState
 import com.ian.app.drinkings.ui.activity.detail.DetailDrinkActivity
+import com.ian.app.drinkings.ui.activity.discover.DiscoverActivity
 import com.ian.app.helper.util.*
 import com.ian.recyclerviewhelper.helper.setUpHorizontal
 import kotlinx.android.synthetic.main.activity_home.*
@@ -34,7 +37,7 @@ class HomeActivity : AppCompatActivity(), HomeView {
             rvAlchoholDrink.setUpHorizontal(nonNullData, R.layout.item_home, {
                 with(this) {
                     tvHomeDrinkName.text = it.strDrink
-                    ivHomeDrink.loadUrl(it.strDrinkThumb)
+                    ivHomeDrink.loadResizeWithGlide(it.strDrinkThumb, this@HomeActivity)
                 }
             }, {
                 startActivity<DetailDrinkActivity> {
@@ -50,7 +53,7 @@ class HomeActivity : AppCompatActivity(), HomeView {
             rvNonAlchoholDrink.setUpHorizontal(nonNullData, R.layout.item_home, {
                 with(this) {
                     tvHomeDrinkName.text = it.strDrink
-                    ivHomeDrink.loadUrl(it.strDrinkThumb)
+                    ivHomeDrink.loadResizeWithGlide(it.strDrinkThumb, this@HomeActivity)
                 }
             }, {
                 startActivity<DetailDrinkActivity> {
@@ -77,7 +80,14 @@ class HomeActivity : AppCompatActivity(), HomeView {
 
     override fun initView() {
         tvSeeAllNonAlchoholDrink.setOnClickListener {
-            startActivity<DetailDrinkActivity>()
+            startActivity<DiscoverActivity> {
+                putExtra(intentKeyToDiscover, nonAlchoholState)
+            }
+        }
+        tvSeeAllAlchoholDrink.setOnClickListener {
+            startActivity<DiscoverActivity> {
+                putExtra(intentKeyToDiscover, alchoholState)
+            }
         }
     }
 

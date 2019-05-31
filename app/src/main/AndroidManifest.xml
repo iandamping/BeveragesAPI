@@ -25,6 +25,9 @@
             android:name=".ui.activity.detail.DetailDrinkActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreen" />
+        <activity android:name=".ui.activity.discover.DiscoverActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen"/>
 
         <meta-data
             android:name="preloaded_fonts"

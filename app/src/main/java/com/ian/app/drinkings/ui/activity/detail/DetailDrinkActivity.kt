@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ian.app.drinkings.R
 import com.ian.app.drinkings.data.model.Drinks
 import com.ian.app.drinkings.data.viewmodel.GetDetailDrinkViewModel
-import com.ian.app.drinkings.helper.Constant.intentKeyToDetail
+import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDetail
 import com.ian.app.helper.util.fullScreen
 import com.ian.app.helper.util.fullScreenAnimation
-import com.ian.app.helper.util.loadUrl
+import com.ian.app.helper.util.loadWithGlide
 import kotlinx.android.synthetic.main.activity_detail_drink.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -34,12 +34,12 @@ class DetailDrinkActivity : AppCompatActivity(), DetailDrinkView {
 
     override fun onSuccesGetData(data: Drinks?) {
         data?.let { nonNullData ->
-            ivDetailedDrink.loadUrl(nonNullData.strDrinkThumb)
+            ivDetailedDrink.loadWithGlide(nonNullData.strDrinkThumb, this)
             ivDetailedDrink.setOnClickListener {
                 fullScreen(nonNullData.strDrinkThumb)
             }
             tvDetailedDrinkCategory.text = "Drink category : ${nonNullData.strCategory}"
-            tvDetailedDrinkArea.text = "Common Drink in ${nonNullData.strArea}"
+            tvDetailedDrinkArea.text = "Usually serve with ${nonNullData.strGlass}"
             tvDetailedDrinkInstruction.text = nonNullData.strInstructions
             toolbarDetailed.title = nonNullData.strDrink
         }

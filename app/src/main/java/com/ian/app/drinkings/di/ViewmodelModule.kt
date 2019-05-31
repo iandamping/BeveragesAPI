@@ -2,6 +2,7 @@ package com.ian.app.drinkings.di
 
 import com.ian.app.drinkings.data.viewmodel.GetAllDrinksViewModel
 import com.ian.app.drinkings.data.viewmodel.GetDetailDrinkViewModel
+import com.ian.app.drinkings.data.viewmodel.GetDiscoverDrinkViewModel
 import org.koin.dsl.module.module
 
 /**
@@ -13,5 +14,6 @@ object ViewmodelModule {
     val allViewmodelModule = module {
         factory { GetAllDrinksViewModel(get()) }
         factory { GetDetailDrinkViewModel(get()) }
+        factory { GetDiscoverDrinkViewModel(get()) }
     }
 }

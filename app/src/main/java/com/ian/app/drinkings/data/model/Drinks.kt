@@ -10,9 +10,10 @@ Github = https://github.com/iandamping
 data class Drinks(
         @field:SerializedName("idDrink") val idDrink: String?,
         @field:SerializedName("strDrink") val strDrink: String?,
-        @field:SerializedName("strCategory") val strDrinkAlternate: String?,
-        @field:SerializedName("strAlcoholic") val strCategory: String?,
-        @field:SerializedName("strGlass") val strArea: String?,
+        @field:SerializedName("strCategory") val strCategory: String?,
+        @field:SerializedName("strAlcoholic") val strAlcoholic: String?,
+        @field:SerializedName("strGlass") val strGlass: String?,
+        @field:SerializedName("strIBA") val strIba: String?,
         @field:SerializedName("strDrinkThumb") val strDrinkThumb: String?,
         @field:SerializedName("strInstructions") val strInstructions: String?,
         @field:SerializedName("strIngredient1") val strIngredient1: String?,

@@ -47,7 +47,7 @@ object NetworkingModule {
                     val ongoing = chain.request().newBuilder()
 //                ongoing.addHeader(ctx.resources.getString(R.string.retrofit_header1), ctx.resources.getString(R.string.fcm_key))
 //                ongoing.addHeader(ctx.resources.getString(R.string.retrofit_header2), ctx.resources.getString(R.string.retrofit_value_header2))
-//                ongoing.addHeader(Constant.NEW_X_OC_MERCHANT_ID, Constant.NEW_X_OC_MERCHANT_VALUE);
+//                ongoing.addHeader(BeverageConstant.NEW_X_OC_MERCHANT_ID, BeverageConstant.NEW_X_OC_MERCHANT_VALUE);
                     chain.proceed(ongoing.build())
                 }
         return okHttpBuilder.build()
