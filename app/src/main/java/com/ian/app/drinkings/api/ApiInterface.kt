@@ -5,6 +5,7 @@ import com.ian.app.drinkings.data.model.GeneralDrinkData
 import com.ian.app.drinkings.di.NetworkingModule
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 /**
  *
@@ -13,12 +14,6 @@ Github = https://github.com/iandamping
  */
 
 interface ApiInterface {
-//
-//    @GET(NetworkingModule.getAlcoholic)
-//    fun getAlchoholicDrinks(): Observable<GeneralDrinkData<AlchoholDrink>>
-//
-//    @GET(NetworkingModule.getNonAlcoholic)
-//    fun getNonAlchoholicDrinks(): Observable<GeneralDrinkData<NonAlchoholDrink>>
 
     @GET(NetworkingModule.getAlcoholic)
     fun getAlchoholicDrinks(): Deferred<GeneralDrinkData<Drinks>>
@@ -28,4 +23,7 @@ interface ApiInterface {
 
     @GET(NetworkingModule.getRandomDrink)
     fun getRandomDrink(): Deferred<GeneralDrinkData<Drinks>>
+
+    @GET(NetworkingModule.getDetailedDrink)
+    fun getDetailedDrink(@Query("i") foodID: String): Deferred<GeneralDrinkData<Drinks>>
 }

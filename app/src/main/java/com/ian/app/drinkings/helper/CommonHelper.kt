@@ -1,6 +1,11 @@
 package com.ian.app.drinkings.helper
 
+import android.app.Dialog
+import android.content.Context
 import android.util.Log
+import android.view.Window
+import com.ian.app.drinkings.R
+import kotlinx.android.synthetic.main.activity_fullscreen.*
 
 /**
  *
@@ -16,4 +21,19 @@ inline fun <reified T> T.logD(msg: String?) {
 inline fun <reified T> T.logE(msg: String?) {
     val tag = T::class.java.simpleName
     Log.e(tag, msg)
+}
+
+fun Context.fullScreen(imageUrl: String?) {
+    imageUrl?.let {
+        val alert = Dialog(this, R.style.AppTheme)
+        alert.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        alert.setContentView(R.layout.activity_fullscreen)
+        alert.setCanceledOnTouchOutside(true)
+        alert.fullScreenImageView.loadUrl(imageUrl)
+        alert.show()
+        alert.ivClose.setOnClickListener {
+            alert.dismiss()
+        }
+    }
+
 }

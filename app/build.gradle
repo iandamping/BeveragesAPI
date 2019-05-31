@@ -43,7 +43,7 @@ dependencies {
     //koin
     implementation 'org.koin:koin-android-viewmodel:1.0.2'
     //recyclerview helper
-    implementation 'com.github.iandamping:RecyclerViewHelper:0.0.1'
+    implementation 'com.github.iandamping:RecyclerViewHelper:0.0.2'
    /* //room
     implementation 'androidx.room:room-runtime:2.1.0-beta01'
     implementation 'androidx.room:room-rxjava2:2.1.0-beta01'

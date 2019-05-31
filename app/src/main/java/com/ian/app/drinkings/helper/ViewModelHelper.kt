@@ -23,6 +23,7 @@ inline fun <reified T : ViewModel> FragmentActivity.withViewModel(body: T.() -> 
 
 inline fun <reified T : ViewModel> FragmentActivity.activityGetViewModelHelper(crossinline factory: () -> T): T {
     val vmFactory = object : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
         override fun <U : ViewModel> create(modelClass: Class<U>): U = factory() as U
     }
     return ViewModelProviders.of(this, vmFactory)[T::class.java]

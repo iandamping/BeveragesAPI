@@ -5,18 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ian.app.drinkings.R
 import com.ian.app.drinkings.data.model.Drinks
 import com.ian.app.drinkings.data.viewmodel.GetAllDrinksViewModel
-import com.ian.app.drinkings.helper.fullScreenAnimation
-import com.ian.app.drinkings.helper.gone
-import com.ian.app.drinkings.helper.loadUrl
-import com.ian.app.drinkings.helper.loadUrlResize
+import com.ian.app.drinkings.helper.*
+import com.ian.app.drinkings.helper.Constant.intentKeyToDetail
+import com.ian.app.drinkings.ui.activity.detail.DetailDrinkActivity
 import com.ian.recyclerviewhelper.helper.setUpHorizontal
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.item_home.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity(), HomeView {
-
-
     private val vm: GetAllDrinksViewModel by viewModel()
     private lateinit var presenter: HomePresenter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +35,10 @@ class HomeActivity : AppCompatActivity(), HomeView {
                     tvHomeDrinkName.text = it.strDrink
                     ivHomeDrink.loadUrl(it.strDrinkThumb)
                 }
+            }, {
+                startActivity<DetailDrinkActivity> {
+                    putExtra(intentKeyToDetail, idDrink)
+                }
             })
         }
 
@@ -50,13 +51,21 @@ class HomeActivity : AppCompatActivity(), HomeView {
                     tvHomeDrinkName.text = it.strDrink
                     ivHomeDrink.loadUrl(it.strDrinkThumb)
                 }
+            }, {
+                startActivity<DetailDrinkActivity> {
+                    putExtra(intentKeyToDetail, idDrink)
+                }
             })
         }
     }
 
     override fun getRandomDrink(data: Drinks?) {
         ivRandomDrink.loadUrlResize(data?.strDrinkThumb)
-
+        lnIcon1.setOnClickListener {
+            startActivity<DetailDrinkActivity> {
+                putExtra(intentKeyToDetail, data?.idDrink)
+            }
+        }
     }
 
     override fun onFailedGetDrink(msg: String?) {
@@ -66,6 +75,9 @@ class HomeActivity : AppCompatActivity(), HomeView {
 
 
     override fun initView() {
+        tvSeeAllNonAlchoholDrink.setOnClickListener {
+            startActivity<DetailDrinkActivity>()
+        }
     }
 
     override fun onPause() {
