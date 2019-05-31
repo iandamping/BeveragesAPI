@@ -6,9 +6,9 @@ import com.ian.app.drinkings.R
 import com.ian.app.drinkings.data.model.Drinks
 import com.ian.app.drinkings.data.viewmodel.GetDetailDrinkViewModel
 import com.ian.app.drinkings.helper.Constant.intentKeyToDetail
-import com.ian.app.drinkings.helper.fullScreen
-import com.ian.app.drinkings.helper.fullScreenAnimation
-import com.ian.app.drinkings.helper.loadUrl
+import com.ian.app.helper.util.fullScreen
+import com.ian.app.helper.util.fullScreenAnimation
+import com.ian.app.helper.util.loadUrl
 import kotlinx.android.synthetic.main.activity_detail_drink.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

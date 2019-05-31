@@ -5,7 +5,7 @@ import com.ian.app.drinkings.base.BaseViewModel
 import com.ian.app.drinkings.base.OnFailedGetData
 import com.ian.app.drinkings.base.OnGetDetailDrinkData
 import com.ian.app.drinkings.base.OnSuccessGetData
-import com.ian.app.drinkings.helper.doSomethingWithDeferred
+import com.ian.app.helper.util.doSomethingWithDeferred
 
 /**
  *

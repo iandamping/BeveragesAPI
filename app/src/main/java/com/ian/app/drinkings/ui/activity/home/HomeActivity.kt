@@ -8,6 +8,7 @@ import com.ian.app.drinkings.data.viewmodel.GetAllDrinksViewModel
 import com.ian.app.drinkings.helper.*
 import com.ian.app.drinkings.helper.Constant.intentKeyToDetail
 import com.ian.app.drinkings.ui.activity.detail.DetailDrinkActivity
+import com.ian.app.helper.util.*
 import com.ian.recyclerviewhelper.helper.setUpHorizontal
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.item_home.view.*
