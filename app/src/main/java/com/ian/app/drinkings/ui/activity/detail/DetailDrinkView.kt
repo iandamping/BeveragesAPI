@@ -10,5 +10,6 @@ Github = https://github.com/iandamping
  */
 interface DetailDrinkView : BaseView {
     fun onSuccesGetData(data: Drinks?)
+    fun onShowIngredientData(dataIngredient: List<String>, dataMeasurement: List<String>)
     fun onFailGetData(msg: String?)
 }

@@ -188,6 +188,8 @@
 
                             <include layout="@layout/shimmer_recycler_bg"/>
 
+                            <include layout="@layout/shimmer_recycler_bg"/>
+
 
                         </LinearLayout>
 
@@ -232,6 +234,12 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rvAlchoholDrink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvOptionalAlchoholDrink"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/spacing_medium"/>

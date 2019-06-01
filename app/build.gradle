@@ -18,7 +18,9 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -45,7 +47,7 @@ dependencies {
     //recyclerview helper
     implementation 'com.github.iandamping:RecyclerViewHelper:0.0.2'
     //common helper
-    implementation 'com.github.iandamping:CommonHelper:0.0.2'
+    implementation 'com.github.iandamping:CommonHelper:0.0.3'
    /* //room
     implementation 'androidx.room:room-runtime:2.1.0-beta01'
     implementation 'androidx.room:room-rxjava2:2.1.0-beta01'

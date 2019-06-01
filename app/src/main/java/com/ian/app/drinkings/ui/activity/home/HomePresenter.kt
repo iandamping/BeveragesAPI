@@ -1,10 +1,7 @@
 package com.ian.app.drinkings.ui.activity.home
 
 import androidx.lifecycle.Observer
-import com.ian.app.drinkings.base.BasePresenter
-import com.ian.app.drinkings.base.OnFailedGetData
-import com.ian.app.drinkings.base.OnGetDrinksData
-import com.ian.app.drinkings.base.OnSuccessGetData
+import com.ian.app.drinkings.base.*
 import com.ian.app.drinkings.data.model.Drinks
 import com.ian.app.drinkings.data.viewmodel.GetAllDrinksViewModel
 
@@ -28,9 +25,9 @@ class HomePresenter(private val vm: GetAllDrinksViewModel) : BasePresenter<HomeV
                 is OnGetDrinksData -> {
                     nonAlchoholDrinksMapper(it.data.first)
                     alchoholDrinksMapper(it.data.second)
-
-                    view()?.getRandomDrink(it.data.third?.get(0))
+                    view()?.getOptionalAlchoholDrink(it.data.third)
                 }
+                is OnGetRandomDrinkData -> view()?.getRandomDrink(it.data?.get(0))
                 is OnFailedGetData -> view()?.onFailedGetDrink(it.msg)
             }
         })

@@ -14,6 +14,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/lnDiscoverContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -35,13 +36,34 @@
                     android:text="@string/explore_the_natural_wonders_drink_of_the_world"
                     android:textColor="#2B2B2B" />
             </LinearLayout>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerGridListContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/lnDiscoverContent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/shimmer_item_list_grid" />
+
+                    <include layout="@layout/shimmer_item_list_grid" />
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDiscoverDrink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lnDiscoverContent" />
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDiscoverDrink"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rlTitle" />
 
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>

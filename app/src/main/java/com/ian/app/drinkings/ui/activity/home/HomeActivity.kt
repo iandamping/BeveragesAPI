@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.item_home.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity(), HomeView {
+
     private val vm: GetAllDrinksViewModel by viewModel()
     private lateinit var presenter: HomePresenter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +63,21 @@ class HomeActivity : AppCompatActivity(), HomeView {
             })
         }
     }
+    override fun getOptionalAlchoholDrink(data: List<Drinks>?) {
+      data?.let {nonNullData ->
+          rvOptionalAlchoholDrink.setUpHorizontal(nonNullData,R.layout.item_home,{
+              with(this){
+                  tvHomeDrinkName.text = it.strDrink
+                  ivHomeDrink.loadResizeWithGlide(it.strDrinkThumb, this@HomeActivity)
+              }
+          },{
+              startActivity<DetailDrinkActivity> {
+                  putExtra(intentKeyToDetail, idDrink)
+              }
+          })
+      }
+    }
+
 
     override fun getRandomDrink(data: Drinks?) {
         ivRandomDrink.loadUrlResize(data?.strDrinkThumb)

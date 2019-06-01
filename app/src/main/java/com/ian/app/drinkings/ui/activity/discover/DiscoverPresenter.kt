@@ -23,7 +23,6 @@ class DiscoverPresenter(private val vm: GetDiscoverDrinkViewModel) : BasePresent
         vm.getDiscoverDrinkData(drinksState).apply {
             vm.liveDataState.observe(getLifeCycleOwner(), Observer {
                 when (it) {
-                    is OnSuccessGetData -> setDialogShow(it.show)
                     is OnFailedGetData -> view()?.onFailGetData(it.msg)
                     is OnGetData<*> -> view()?.onSuccessGetData(it.data as List<Drinks>?)
                 }

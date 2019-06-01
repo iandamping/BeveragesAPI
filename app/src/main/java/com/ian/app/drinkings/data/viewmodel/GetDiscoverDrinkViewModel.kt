@@ -16,21 +16,16 @@ Github = https://github.com/iandamping
 class GetDiscoverDrinkViewModel(private val api: ApiInterface) : BaseViewModel() {
 
     fun getDiscoverDrinkData(state: String) {
-        liveDataState.value = OnSuccessGetData(false)
         if (state == alchoholState) {
             uiScope.doSomethingWithDeferred(api.getAlchoholicDrinks(), {
-                liveDataState.value = OnSuccessGetData(true)
                 liveDataState.value = OnGetData(it.cocktailDrinks)
             }, {
-                liveDataState.value = OnSuccessGetData(true)
                 liveDataState.value = OnFailedGetData(it)
             })
         } else {
             uiScope.doSomethingWithDeferred(api.getNonAlchoholicDrinks(), {
                 liveDataState.value = OnGetData(it.cocktailDrinks)
-                liveDataState.value = OnSuccessGetData(true)
             }, {
-                liveDataState.value = OnSuccessGetData(true)
                 liveDataState.value = OnFailedGetData(it)
             })
         }

@@ -9,6 +9,7 @@ import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDetail
 import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDiscover
 import com.ian.app.drinkings.ui.activity.detail.DetailDrinkActivity
 import com.ian.app.helper.util.fullScreenAnimation
+import com.ian.app.helper.util.gone
 import com.ian.app.helper.util.loadResizeWithGlide
 import com.ian.app.helper.util.startActivity
 import com.ian.recyclerviewhelper.helper.setUpWithGrid
@@ -36,11 +37,18 @@ class DiscoverActivity : AppCompatActivity(), DiscoverView {
     }
 
     override fun onSuccessGetData(data: List<Drinks>?) {
+        shimmerGridListContainer?.stopShimmer()
+        shimmerGridListContainer?.gone()
         data?.let { nonNullData ->
             rvDiscoverDrink.setUpWithGrid(nonNullData, R.layout.item_discover_drinks, 2, {
                 with(this) {
                     ivDiscoverDrink.loadResizeWithGlide(it.strDrinkThumb, this@DiscoverActivity)
-                    tvDiscoverDrinkCategory.text = it.strDrink
+                    if (it.strDrink?.length!! >= 12) {
+                        val tmp = it.strDrink.substring(0, 12) + " ..."
+                        tvDiscoverDrinkCategory.text = tmp
+                    } else {
+                        tvDiscoverDrinkCategory.text = it.strDrink
+                    }
                 }
             }, {
                 startActivity<DetailDrinkActivity> {
@@ -53,8 +61,20 @@ class DiscoverActivity : AppCompatActivity(), DiscoverView {
     }
 
     override fun onFailGetData(msg: String?) {
+        shimmerGridListContainer?.stopShimmer()
+        shimmerGridListContainer?.gone()
     }
 
     override fun initView() {
+    }
+
+    override fun onPause() {
+        super.onPause()
+        shimmerGridListContainer?.stopShimmer()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        shimmerGridListContainer?.startShimmer()
     }
 }

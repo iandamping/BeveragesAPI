@@ -1,11 +1,8 @@
 package com.ian.app.drinkings.data.viewmodel
 
 import com.ian.app.drinkings.api.ApiInterface
-import com.ian.app.drinkings.base.BaseViewModel
-import com.ian.app.drinkings.base.OnFailedGetData
-import com.ian.app.drinkings.base.OnGetDrinksData
-import com.ian.app.drinkings.base.OnSuccessGetData
-import com.ian.app.helper.util.deferredTriple
+import com.ian.app.drinkings.base.*
+import com.ian.app.helper.util.combineTripleWithSingleDeferred
 
 /**
  *
@@ -14,18 +11,28 @@ Github = https://github.com/iandamping
  */
 class GetAllDrinksViewModel(private val api: ApiInterface) : BaseViewModel() {
 
+
     fun getDrinksData() {
         liveDataState.value = OnSuccessGetData(false)
-        uiScope.deferredTriple(
-                Triple(api.getNonAlchoholicDrinks(), api.getAlchoholicDrinks(), api.getRandomDrink()),
-                { first, second, third ->
-                    liveDataState.value = OnSuccessGetData(true)
-                    liveDataState.value =
-                            OnGetDrinksData(Triple(first.cocktailDrinks, second.cocktailDrinks, third.cocktailDrinks))
-                }) {
-            liveDataState.value = OnSuccessGetData(true)
-            liveDataState.value = OnFailedGetData(it)
-        }
+        uiScope.combineTripleWithSingleDeferred(
+            Pair(
+                Triple(api.getNonAlchoholicDrinks(), api.getAlchoholicDrinks(), api.getOptionalAlchoholicDrinks()),
+                api.getRandomDrink()
+            )
+            , {
+                liveDataState.value = OnSuccessGetData(true)
+                liveDataState.value = OnGetRandomDrinkData(it.second.cocktailDrinks)
+                liveDataState.value = OnGetDrinksData(
+                    Triple(
+                        it.first.first.cocktailDrinks,
+                        it.first.second.cocktailDrinks,
+                        it.first.third.cocktailDrinks
+                    )
+                )
+            }, {
+                liveDataState.value = OnSuccessGetData(true)
+                liveDataState.value = OnFailedGetData(it)
+            })
     }
 
     override fun onCleared() {

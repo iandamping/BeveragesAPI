@@ -21,6 +21,9 @@ interface ApiInterface {
     @GET(NetworkingModule.getNonAlcoholic)
     fun getNonAlchoholicDrinks(): Deferred<GeneralDrinkData<Drinks>>
 
+    @GET(NetworkingModule.getOptionalAlchoholic)
+    fun getOptionalAlchoholicDrinks(): Deferred<GeneralDrinkData<Drinks>>
+
     @GET(NetworkingModule.getRandomDrink)
     fun getRandomDrink(): Deferred<GeneralDrinkData<Drinks>>
 

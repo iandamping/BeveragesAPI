@@ -20,8 +20,12 @@ object NetworkingModule {
     private const val baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/"
     const val getNonAlcoholic = "filter.php?a=Non_Alcoholic"
     const val getAlcoholic = "filter.php?a=Alcoholic"
+    const val getOptionalAlchoholic = "filter.php?a=Optional alcohol"
     const val getRandomDrink = "random.php"
     const val getDetailedDrink = "lookup.php"
+    const val getAllDrinkCategories = "list.php?c=list"
+    const val getAllDrinkGlasses = "list.php?g=list"
+    const val getAllDrinkIngredients = "list.php?i=list"
 
     val networkModule = module {
         single { createOkHttpClient() }
