@@ -23,9 +23,8 @@ object NetworkingModule {
     const val getOptionalAlchoholic = "filter.php?a=Optional alcohol"
     const val getRandomDrink = "random.php"
     const val getDetailedDrink = "lookup.php"
-    const val getAllDrinkCategories = "list.php?c=list"
-    const val getAllDrinkGlasses = "list.php?g=list"
-    const val getAllDrinkIngredients = "list.php?i=list"
+    const val getListsData = "list"
+    const val getListsPhp = "list.php"
 
     val networkModule = module {
         single { createOkHttpClient() }

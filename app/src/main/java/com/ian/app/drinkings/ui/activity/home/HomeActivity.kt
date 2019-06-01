@@ -6,11 +6,17 @@ import com.ian.app.drinkings.R
 import com.ian.app.drinkings.data.model.Drinks
 import com.ian.app.drinkings.data.viewmodel.GetAllDrinksViewModel
 import com.ian.app.drinkings.helper.BeverageConstant.alchoholState
+import com.ian.app.drinkings.helper.BeverageConstant.filterByCategory
+import com.ian.app.drinkings.helper.BeverageConstant.filterByGlass
+import com.ian.app.drinkings.helper.BeverageConstant.filterByIngredient
 import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDetail
 import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDiscover
+import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToFilter
 import com.ian.app.drinkings.helper.BeverageConstant.nonAlchoholState
+import com.ian.app.drinkings.helper.BeverageConstant.optionalAlchoholState
 import com.ian.app.drinkings.ui.activity.detail.DetailDrinkActivity
 import com.ian.app.drinkings.ui.activity.discover.DiscoverActivity
+import com.ian.app.drinkings.ui.activity.filter.FilterActivity
 import com.ian.app.helper.util.*
 import com.ian.recyclerviewhelper.helper.setUpHorizontal
 import kotlinx.android.synthetic.main.activity_home.*
@@ -103,6 +109,26 @@ class HomeActivity : AppCompatActivity(), HomeView {
         tvSeeAllAlchoholDrink.setOnClickListener {
             startActivity<DiscoverActivity> {
                 putExtra(intentKeyToDiscover, alchoholState)
+            }
+        }
+        tvSeeAllOptionalAlchoholDrink.setOnClickListener {
+            startActivity<DiscoverActivity> {
+                putExtra(intentKeyToDiscover, optionalAlchoholState)
+            }
+        }
+        lnIcon2.setOnClickListener {
+            startActivity<FilterActivity> {
+                putExtra(intentKeyToFilter, filterByCategory)
+            }
+        }
+        lnIcon3.setOnClickListener {
+            startActivity<FilterActivity> {
+                putExtra(intentKeyToFilter, filterByGlass)
+            }
+        }
+        lnIcon4.setOnClickListener {
+            startActivity<FilterActivity> {
+                putExtra(intentKeyToFilter, filterByIngredient)
             }
         }
     }

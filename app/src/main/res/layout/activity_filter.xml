@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTittle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_medium"
+            android:fontFamily="@font/lato"
+            android:text="All Filter information"
+            android:textSize="@dimen/letter_xlarge"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvInformationFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTittle1"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing_medium" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFilter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvTittle1"
+            android:paddingTop="@dimen/spacing_medium">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/spacing_medium">
+
+                <include layout="@layout/shimmer_item_ingredient" />
+
+                <include layout="@layout/shimmer_item_ingredient" />
+
+                <include layout="@layout/shimmer_item_ingredient" />
+
+                <include layout="@layout/shimmer_item_ingredient" />
+
+                <include layout="@layout/shimmer_item_ingredient" />
+
+                <include layout="@layout/shimmer_item_ingredient" />
+
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </RelativeLayout>
+
+
+</androidx.core.widget.NestedScrollView>

@@ -8,7 +8,11 @@ Github = https://github.com/iandamping
 object BeverageConstant {
     const val alchoholState = "alchohol"
     const val nonAlchoholState = "non alchohol"
+    const val optionalAlchoholState = "optional alchohol"
+    const val filterByCategory = "category"
+    const val filterByGlass = "glass"
+    const val filterByIngredient = "ingredient"
     const val intentKeyToDetail = "detailed Drinks"
     const val intentKeyToDiscover = "discover Drinks"
-
+    const val intentKeyToFilter = "filter Drinks"
 }

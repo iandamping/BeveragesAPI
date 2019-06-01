@@ -29,4 +29,13 @@ interface ApiInterface {
 
     @GET(NetworkingModule.getDetailedDrink)
     fun getDetailedDrink(@Query("i") foodID: String): Deferred<GeneralDrinkData<Drinks>>
+
+    @GET(NetworkingModule.getListsPhp)
+    fun getAllDrinkCategories(@Query ("c") category:String):Deferred<GeneralDrinkData<Drinks>>
+
+    @GET(NetworkingModule.getListsPhp)
+    fun getAllDrinkGlasses(@Query ("g") category:String):Deferred<GeneralDrinkData<Drinks>>
+
+    @GET(NetworkingModule.getListsPhp)
+    fun getAllDrinkIngredients(@Query ("i") category:String):Deferred<GeneralDrinkData<Drinks>>
 }
