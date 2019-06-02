@@ -1,11 +1,13 @@
 package com.ian.app.drinkings.ui.activity.home
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.ian.app.drinkings.R
 import com.ian.app.drinkings.data.model.Drinks
 import com.ian.app.drinkings.data.viewmodel.GetAllDrinksViewModel
 import com.ian.app.drinkings.helper.BeverageConstant.alchoholState
+import com.ian.app.drinkings.helper.BeverageConstant.delayMillis
 import com.ian.app.drinkings.helper.BeverageConstant.filterByCategory
 import com.ian.app.drinkings.helper.BeverageConstant.filterByGlass
 import com.ian.app.drinkings.helper.BeverageConstant.filterByIngredient
@@ -17,6 +19,7 @@ import com.ian.app.drinkings.helper.BeverageConstant.optionalAlchoholState
 import com.ian.app.drinkings.ui.activity.detail.DetailDrinkActivity
 import com.ian.app.drinkings.ui.activity.discover.DiscoverActivity
 import com.ian.app.drinkings.ui.activity.filter.FilterActivity
+import com.ian.app.drinkings.ui.activity.home.slideradapter.SliderItemAdapter
 import com.ian.app.helper.util.*
 import com.ian.recyclerviewhelper.helper.setUpHorizontal
 import kotlinx.android.synthetic.main.activity_home.*
@@ -24,9 +27,11 @@ import kotlinx.android.synthetic.main.item_home.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity(), HomeView {
-
     private val vm: GetAllDrinksViewModel by viewModel()
     private lateinit var presenter: HomePresenter
+    private var mHandler: Handler? = null
+    private var pageSize: Int? = 0
+    private var currentPage = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fullScreenAnimation()
@@ -35,6 +40,26 @@ class HomeActivity : AppCompatActivity(), HomeView {
             attachView(this@HomeActivity, this@HomeActivity)
             onCreate()
         }
+        mHandler = Handler()
+    }
+    private var slideRunnable: Runnable = object : Runnable {
+        override fun run() {
+            if (currentPage == pageSize) {
+                currentPage = 0
+            }
+            vpBestDrink?.setCurrentItem(currentPage++, true)
+            mHandler?.postDelayed(this, delayMillis)
+        }
+    }
+
+    override fun getHeadlineDrinks(data: List<Drinks>?) {
+        pageSize = data?.size
+        vpBestDrink?.adapter = data?.let { SliderItemAdapter(it, this@HomeActivity) }
+        indicator?.setViewPager(vpBestDrink)
+        if (mHandler != null) {
+            mHandler?.removeCallbacks(slideRunnable)
+        }
+        mHandler?.postDelayed(slideRunnable, delayMillis)
     }
 
     override fun getAlchoholDrink(data: List<Drinks>?) {

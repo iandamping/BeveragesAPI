@@ -6,6 +6,7 @@ Created by Ian Damping on 25/05/2019.
 Github = https://github.com/iandamping
  */
 object BeverageConstant {
+    const val delayMillis = 4000L
     const val alchoholState = "alchohol"
     const val nonAlchoholState = "non alchohol"
     const val optionalAlchoholState = "optional alchohol"

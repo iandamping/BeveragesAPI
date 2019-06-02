@@ -9,6 +9,7 @@ Created by Ian Damping on 25/05/2019.
 Github = https://github.com/iandamping
  */
 interface HomeView : BaseView {
+    fun getHeadlineDrinks(data:List<Drinks>?)
     fun getAlchoholDrink(data: List<Drinks>?)
     fun getNonAlcoholDrink(data: List<Drinks>?)
     fun getOptionalAlchoholDrink(data: List<Drinks>?)

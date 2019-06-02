@@ -12,6 +12,7 @@ Github = https://github.com/iandamping
  */
 class HomePresenter(private val vm: GetAllDrinksViewModel) : BasePresenter<HomeView>() {
     private val ranges = 1..10
+    private val smallRanges = 1..5
     override fun onCreate() {
         view()?.initView()
         vm.getDrinksData()
@@ -25,6 +26,7 @@ class HomePresenter(private val vm: GetAllDrinksViewModel) : BasePresenter<HomeV
                     nonAlchoholDrinksMapper(it.data.first)
                     alchoholDrinksMapper(it.data.second)
                     view()?.getOptionalAlchoholDrink(it.data.third)
+                    getHeadlineDrinks(Triple(it.data.first,it.data.second,it.data.third))
                 }
                 is OnGetRandomDrinkData -> view()?.getRandomDrink(it.data?.get(0))
                 is OnFailedGetData -> view()?.onFailedGetDrink(it.msg)
@@ -50,6 +52,22 @@ class HomePresenter(private val vm: GetAllDrinksViewModel) : BasePresenter<HomeV
             }
         }
         view()?.getNonAlcoholDrink(newData)
+    }
+
+    private fun getHeadlineDrinks(data:Triple<List<Drinks>?,List<Drinks>?,List<Drinks>?>){
+        val newData: MutableList<Drinks> = mutableListOf()
+        for (i in smallRanges){
+            if (data.first!=null){
+                newData.add(data.first!![i])
+            }
+            if (data.second!=null){
+                newData.add(data.second!![i])
+            }
+            if (data.third!=null){
+                newData.add(data.third!![i])
+            }
+        }
+        view()?.getHeadlineDrinks(newData)
     }
 
 }
