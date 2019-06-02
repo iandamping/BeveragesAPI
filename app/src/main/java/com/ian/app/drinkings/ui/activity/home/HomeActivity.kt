@@ -69,19 +69,20 @@ class HomeActivity : AppCompatActivity(), HomeView {
             })
         }
     }
+
     override fun getOptionalAlchoholDrink(data: List<Drinks>?) {
-      data?.let {nonNullData ->
-          rvOptionalAlchoholDrink.setUpHorizontal(nonNullData,R.layout.item_home,{
-              with(this){
-                  tvHomeDrinkName.text = it.strDrink
-                  ivHomeDrink.loadResizeWithGlide(it.strDrinkThumb, this@HomeActivity)
-              }
-          },{
-              startActivity<DetailDrinkActivity> {
-                  putExtra(intentKeyToDetail, idDrink)
-              }
-          })
-      }
+        data?.let { nonNullData ->
+            rvOptionalAlchoholDrink.setUpHorizontal(nonNullData, R.layout.item_home, {
+                with(this) {
+                    tvHomeDrinkName.text = it.strDrink
+                    ivHomeDrink.loadResizeWithGlide(it.strDrinkThumb, this@HomeActivity)
+                }
+            }, {
+                startActivity<DetailDrinkActivity> {
+                    putExtra(intentKeyToDetail, idDrink)
+                }
+            })
+        }
     }
 
 

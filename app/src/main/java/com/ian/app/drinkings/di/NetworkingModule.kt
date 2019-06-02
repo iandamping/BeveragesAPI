@@ -25,6 +25,7 @@ object NetworkingModule {
     const val getDetailedDrink = "lookup.php"
     const val getListsData = "list"
     const val getListsPhp = "list.php"
+    const val getFilterData = "filter.php"
 
     val networkModule = module {
         single { createOkHttpClient() }

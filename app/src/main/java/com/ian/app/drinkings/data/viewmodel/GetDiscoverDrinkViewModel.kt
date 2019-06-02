@@ -4,7 +4,6 @@ import com.ian.app.drinkings.api.ApiInterface
 import com.ian.app.drinkings.base.BaseViewModel
 import com.ian.app.drinkings.base.OnFailedGetData
 import com.ian.app.drinkings.base.OnGetData
-import com.ian.app.drinkings.base.OnSuccessGetData
 import com.ian.app.drinkings.helper.BeverageConstant.alchoholState
 import com.ian.app.drinkings.helper.BeverageConstant.optionalAlchoholState
 import com.ian.app.helper.util.doSomethingWithDeferred
@@ -35,6 +34,31 @@ class GetDiscoverDrinkViewModel(private val api: ApiInterface) : BaseViewModel()
             })
         }
     }
+
+    fun getDiscoverCategoryDrinkData(passedData: String) {
+        uiScope.doSomethingWithDeferred(api.getFilterDataByCategory(passedData), {
+            liveDataState.value = OnGetData(it.cocktailDrinks)
+        }, {
+            liveDataState.value = OnFailedGetData(it)
+        })
+    }
+
+    fun getDiscoverGlassDrinkData(passedData: String) {
+        uiScope.doSomethingWithDeferred(api.getFilterDataByGlass(passedData), {
+            liveDataState.value = OnGetData(it.cocktailDrinks)
+        }, {
+            liveDataState.value = OnFailedGetData(it)
+        })
+    }
+
+    fun getDiscoverIngredientDrinkData(passedData: String) {
+        uiScope.doSomethingWithDeferred(api.getFilterDataByIngredients(passedData), {
+            liveDataState.value = OnGetData(it.cocktailDrinks)
+        }, {
+            liveDataState.value = OnFailedGetData(it)
+        })
+    }
+
     override fun onCleared() {
         super.onCleared()
         fetchingJob.cancel()

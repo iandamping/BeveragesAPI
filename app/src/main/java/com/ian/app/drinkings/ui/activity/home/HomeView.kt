@@ -11,7 +11,7 @@ Github = https://github.com/iandamping
 interface HomeView : BaseView {
     fun getAlchoholDrink(data: List<Drinks>?)
     fun getNonAlcoholDrink(data: List<Drinks>?)
-    fun getOptionalAlchoholDrink(data:List<Drinks>?)
+    fun getOptionalAlchoholDrink(data: List<Drinks>?)
     fun getRandomDrink(data: Drinks?)
     fun onFailedGetDrink(msg: String?)
 }

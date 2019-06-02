@@ -26,7 +26,7 @@ class DetailDrinkPresenter(private val vm: GetDetailDrinkViewModel) : BasePresen
                 when (it) {
                     is OnSuccessGetData -> setDialogShow(it.show)
                     is OnGetDetailDrinkData -> {
-                        view()?.onSuccesGetData( it.data)
+                        view()?.onSuccesGetData(it.data)
 
                         it.data?.let { nonNullData -> extractIngredientData(nonNullData) }
                     }

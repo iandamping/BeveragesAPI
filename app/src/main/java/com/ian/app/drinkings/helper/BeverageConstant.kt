@@ -15,4 +15,5 @@ object BeverageConstant {
     const val intentKeyToDetail = "detailed Drinks"
     const val intentKeyToDiscover = "discover Drinks"
     const val intentKeyToFilter = "filter Drinks"
+    const val intentKeyToDiscoverToGetData = "filtering data"
 }

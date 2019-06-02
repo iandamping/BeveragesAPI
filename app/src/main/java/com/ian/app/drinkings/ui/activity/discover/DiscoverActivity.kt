@@ -7,6 +7,7 @@ import com.ian.app.drinkings.data.model.Drinks
 import com.ian.app.drinkings.data.viewmodel.GetDiscoverDrinkViewModel
 import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDetail
 import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDiscover
+import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToDiscoverToGetData
 import com.ian.app.drinkings.ui.activity.detail.DetailDrinkActivity
 import com.ian.app.helper.util.fullScreenAnimation
 import com.ian.app.helper.util.gone
@@ -33,6 +34,7 @@ class DiscoverActivity : AppCompatActivity(), DiscoverView {
             attachView(this@DiscoverActivity, this@DiscoverActivity)
             onCreate()
             getDiscoverData(intent.getStringExtra(intentKeyToDiscover))
+            getPassedDiscoverData(intent.getStringExtra(intentKeyToDiscoverToGetData))
         }
     }
 

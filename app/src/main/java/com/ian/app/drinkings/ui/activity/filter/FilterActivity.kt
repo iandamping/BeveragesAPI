@@ -2,14 +2,14 @@ package com.ian.app.drinkings.ui.activity.filter
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ian.app.drinkings.DrinkingsApp.Companion.gson
 import com.ian.app.drinkings.R
 import com.ian.app.drinkings.data.model.Drinks
 import com.ian.app.drinkings.data.viewmodel.GetFilterDrinksViewModel
+import com.ian.app.drinkings.helper.BeverageConstant
 import com.ian.app.drinkings.helper.BeverageConstant.intentKeyToFilter
-import com.ian.app.helper.util.fullScreenAnimation
-import com.ian.app.helper.util.gone
-import com.ian.app.helper.util.loadResizeWithGlide
-import com.ian.app.helper.util.logE
+import com.ian.app.drinkings.ui.activity.discover.DiscoverActivity
+import com.ian.app.helper.util.*
 import com.ian.recyclerviewhelper.helper.setUpWithGrid
 import kotlinx.android.synthetic.main.activity_filter.*
 import kotlinx.android.synthetic.main.item_filter.view.*
@@ -37,49 +37,53 @@ class FilterActivity : AppCompatActivity(), FilterView {
     override fun onGetFilterData(data: List<Drinks>?) {
         shimmerFilter?.stopShimmer()
         shimmerFilter?.gone()
-            rvInformationFilter.setUpWithGrid(data,R.layout.item_filter,3,{
-                with(this){
-                    when {
-                        !it.strGlass.isNullOrEmpty() -> {
-                            if (it.strGlass.length >= 12) {
-                                val tmp = it.strGlass.substring(0, 12) + " ..."
-                                tvDescriptionFilter.text = tmp
-                            } else {
-                                tvDescriptionFilter.text = it.strGlass
-                            }
-                            ivDescriptionFilter.loadResizeWithGlide(
+        rvInformationFilter.setUpWithGrid(data, R.layout.item_filter, 3, {
+            with(this) {
+                when {
+                    !it.strGlass.isNullOrEmpty() -> {
+                        if (it.strGlass.length >= 12) {
+                            val tmp = it.strGlass.substring(0, 12) + " ..."
+                            tvDescriptionFilter.text = tmp
+                        } else {
+                            tvDescriptionFilter.text = it.strGlass
+                        }
+                        ivDescriptionFilter.loadResizeWithGlide(
                                 resources.getString(R.string.ingredient_images_helper) + it.strGlass + "-Small.png",
                                 this@FilterActivity
-                            )
+                        )
 
+                    }
+                    !it.strCategory.isNullOrEmpty() -> {
+                        if (it.strCategory.length >= 12) {
+                            val tmp = it.strCategory.substring(0, 12) + " ..."
+                            tvDescriptionFilter.text = tmp
+                        } else {
+                            tvDescriptionFilter.text = it.strCategory
                         }
-                        !it.strCategory.isNullOrEmpty() -> {
-                            if (it.strCategory.length >= 12) {
-                                val tmp = it.strCategory.substring(0, 12) + " ..."
-                                tvDescriptionFilter.text = tmp
-                            } else {
-                                tvDescriptionFilter.text = it.strCategory
-                            }
-                            ivDescriptionFilter.loadResizeWithGlide(
+                        ivDescriptionFilter.loadResizeWithGlide(
                                 resources.getString(R.string.ingredient_images_helper) + it.strCategory + "-Small.png",
                                 this@FilterActivity
-                            )
+                        )
+                    }
+                    !it.strIngredient1.isNullOrEmpty() -> {
+                        if (it.strIngredient1.length >= 12) {
+                            val tmp = it.strIngredient1.substring(0, 12) + " ..."
+                            tvDescriptionFilter.text = tmp
+                        } else {
+                            tvDescriptionFilter.text = it.strIngredient1
                         }
-                        !it.strIngredient1.isNullOrEmpty() -> {
-                            if (it.strIngredient1.length >= 12) {
-                                val tmp = it.strIngredient1.substring(0, 12) + " ..."
-                                tvDescriptionFilter.text = tmp
-                            } else {
-                                tvDescriptionFilter.text = it.strIngredient1
-                            }
-                            ivDescriptionFilter.loadResizeWithGlide(
+                        ivDescriptionFilter.loadResizeWithGlide(
                                 resources.getString(R.string.ingredient_images_helper) + it.strIngredient1 + "-Small.png",
                                 this@FilterActivity
-                            )
-                        }
+                        )
                     }
                 }
-            })
+            }
+        }, {
+            startActivity<DiscoverActivity> {
+                putExtra(BeverageConstant.intentKeyToDiscoverToGetData, gson.toJson(this@setUpWithGrid))
+            }
+        })
 
 
     }
