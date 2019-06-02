@@ -21,7 +21,6 @@ class HomePresenter(private val vm: GetAllDrinksViewModel) : BasePresenter<HomeV
     private fun getData() {
         vm.liveDataState.observe(getLifeCycleOwner(), Observer {
             when (it) {
-                is OnSuccessGetData -> setDialogShow(it.show)
                 is OnGetDrinksData -> {
                     nonAlchoholDrinksMapper(it.data.first)
                     alchoholDrinksMapper(it.data.second)

@@ -37,7 +37,7 @@ class FilterActivity : AppCompatActivity(), FilterView {
     override fun onGetFilterData(data: List<Drinks>?) {
         shimmerFilter?.stopShimmer()
         shimmerFilter?.gone()
-        rvInformationFilter.setUpWithGrid(data, R.layout.item_filter, 3, {
+        rvInformationFilter.setUpWithGrid(data, R.layout.item_filter, 4, {
             with(this) {
                 when {
                     !it.strGlass.isNullOrEmpty() -> {
