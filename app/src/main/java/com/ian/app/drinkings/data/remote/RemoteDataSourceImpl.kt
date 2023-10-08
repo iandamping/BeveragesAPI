@@ -25,8 +25,8 @@ class RemoteDataSourceImpl @Inject constructor(private val apiInterface: ApiInte
                     }"
                 )
             }
-        } catch (e: Exception) {
-            DataSource.Error(e.message ?: "defaul error")
+        } catch (e: IllegalArgumentException) {
+            DataSource.Error(e.message ?: "default error")
         }
     }
 
@@ -46,7 +46,7 @@ class RemoteDataSourceImpl @Inject constructor(private val apiInterface: ApiInte
                     }"
                 )
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             DataSource.Error(e.message ?: "defaul error")
         }
     }
