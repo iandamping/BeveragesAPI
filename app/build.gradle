@@ -94,6 +94,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
+    testImplementation(unitTestLibs.bundles.mockito)
+
     //splash
     implementation 'androidx.core:core-splashscreen:1.0.0'
     //Preferences data store
@@ -112,6 +114,7 @@ dependencies {
     implementation(libs.coil.compose)
     //coroutine
     implementation(libs.bundles.coroutine.bundle)
+    implementation(unitTestLibs.coroutine.unit.test)
     //retrofit
     implementation(libs.bundles.retrofit.bundle)
     implementation(libs.bundles.okhttp.bundle)

@@ -72,6 +72,9 @@ subprojects {
     }
 
     tasks.withType(Detekt).configureEach {
+        include("**/*.kt")
+        exclude("**/build/**")
+
         reports {
             xml.required.set(true)
             html.required.set(true)
