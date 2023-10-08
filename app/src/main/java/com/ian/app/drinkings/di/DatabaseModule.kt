@@ -1,20 +1,39 @@
 package com.ian.app.drinkings.di
 
+import android.content.Context
 import androidx.room.Room
-import com.ian.app.drinkings.data.localdata.MyDrinkingDatabase
-import org.koin.dsl.module.module
+import com.ian.app.drinkings.data.local.BeveragesDatabase
+import com.ian.app.drinkings.data.local.dao.AlcoholDrinkDao
+import com.ian.app.drinkings.data.local.dao.NonAlcoholDrinkDao
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-/**
- *
-Created by Ian Damping on 25/05/2019.
-Github = https://github.com/iandamping
- */
+@Module
+@InstallIn(SingletonComponent::class)
 object DatabaseModule {
-    val databaseModule = module {
-        // Room Database instance
-        single { Room.databaseBuilder(get(), MyDrinkingDatabase::class.java, "DrinkingLocalData").build() }
-        // localDao instance (get instance from MyDrinkingDatabase)
-        single { get<MyDrinkingDatabase>().alchoholDrinkDao() }
-        single { get<MyDrinkingDatabase>().nonAlchoholDrinkDao() }
+
+    private const val DATABASE_NAME = "beverages.db"
+
+    @Provides
+    @Singleton
+    fun provideDb(@ApplicationContext context: Context): BeveragesDatabase {
+        return Room
+            .databaseBuilder(context, BeveragesDatabase::class.java, DATABASE_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    fun provideBorneoPlacesDao(db: BeveragesDatabase): AlcoholDrinkDao {
+        return db.alchoholDrinkDao()
+    }
+
+    @Provides
+    fun provideFavoriteBorneoPlacesDao(db: BeveragesDatabase): NonAlcoholDrinkDao {
+        return db.nonAlchoholDrinkDao()
     }
 }
