@@ -84,4 +84,60 @@ class RemoteDataSourceImplTest {
 
             assertEquals(DataSource.Error("default error"), result)
         }
+
+    @Test
+    fun `when RemoteDataSource getNonAlcoholicDrinks() return Success`() = runTest {
+        val data = GeneralDrinkData(DummyResponse.DUMMY_NON_ALCOHOL)
+        Mockito.`when`(apiInterface.getNonAlcoholicDrinks()).thenReturn(
+            Response.success(
+                data
+            )
+        )
+
+        val result = sut.getNonAlcoholicDrinks()
+
+        assertEquals(DataSource.Success(data), result)
+    }
+
+    @Test
+    fun `when RemoteDataSource getNonAlcoholicDrinks() return Error`() = runTest {
+        Mockito.`when`(apiInterface.getNonAlcoholicDrinks()).thenReturn(
+            Response.error(
+                404,
+                "{\"message\":\"Not Found\"}".toResponseBody("text/plain".toMediaType())
+            )
+        )
+
+        val result = sut.getNonAlcoholicDrinks()
+
+        assertEquals(
+            DataSource.Error(
+                "Error from retrofit Http Code is not 200 .. 300 with message : {\"message\":\"Not Found\"}"
+            ),
+            result
+        )
+    }
+
+    @Test
+    fun `when RemoteDataSource getNonAlcoholicDrinks() return null Body`() = runTest {
+        Mockito.`when`(apiInterface.getNonAlcoholicDrinks()).thenReturn(
+            Response.success(
+                null
+            )
+        )
+
+        val result = sut.getNonAlcoholicDrinks()
+
+        assertEquals(DataSource.Error("Error from retrofit : Body null"), result)
+    }
+
+    @Test
+    fun `when RemoteDataSource getNonAlcoholicDrinks() return throw IllegalArgumentException`() =
+        runTest {
+            Mockito.`when`(apiInterface.getNonAlcoholicDrinks()).thenThrow(IllegalArgumentException())
+
+            val result = sut.getNonAlcoholicDrinks()
+
+            assertEquals(DataSource.Error("default error"), result)
+        }
 }
