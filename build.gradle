@@ -35,6 +35,10 @@ subprojects {
                         "*Fragment\$*",
                         "*Activity",
                         "*Activity\$*",
+                        "*DrinkingsApp",
+                        "*DrinkingsApp\$*",
+                        "*ComposableSingletons",
+                        "*ComposableSingletons\$*",
                         "*.databinding.*",
                         "*Factory*",
                         "*Hilt*",
@@ -50,7 +54,12 @@ subprojects {
                         "*.DataBindingTriggerClass*",
                         "*.BR*",
                         "*_MembersInjector*",
-//                        "com.permatabank.qram.MainApplication",
+                        "com.ian.app.drinkings.MainActivityKt",
+                        "com.ian.app.drinkings.data.local.*",
+                        "com.ian.app.drinkings.data.local.dao.*",
+                        "com.ian.app.drinkings.data.local.entity.*",
+                        "com.ian.app.drinkings.di.*",
+                        "com.ian.app.drinkings.ui.theme.*",
 //                        "com.permatabank.qram.core.base.*"
                 )
             }
