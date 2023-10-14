@@ -2,9 +2,9 @@ package com.ian.app.drinkings.di
 
 import android.content.Context
 import androidx.room.Room
-import com.ian.app.drinkings.data.local.BeveragesDatabase
-import com.ian.app.drinkings.data.local.dao.AlcoholDrinkDao
-import com.ian.app.drinkings.data.local.dao.NonAlcoholDrinkDao
+import com.ian.app.drinkings.core.data.local.dao.AlcoholDrinkDao
+import com.ian.app.drinkings.core.data.local.dao.NonAlcoholDrinkDao
+import com.ian.app.drinkings.core.data.local.database.BeveragesDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
