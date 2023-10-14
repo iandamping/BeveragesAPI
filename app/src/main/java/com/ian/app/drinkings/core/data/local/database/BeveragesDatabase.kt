@@ -1,11 +1,11 @@
-package com.ian.app.drinkings.data.local
+package com.ian.app.drinkings.core.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.ian.app.drinkings.data.local.dao.AlcoholDrinkDao
-import com.ian.app.drinkings.data.local.dao.NonAlcoholDrinkDao
-import com.ian.app.drinkings.data.local.entity.EntityAlcoholDrink
-import com.ian.app.drinkings.data.local.entity.EntityNonAlcoholDrink
+import com.ian.app.drinkings.core.data.local.dao.AlcoholDrinkDao
+import com.ian.app.drinkings.core.data.local.dao.NonAlcoholDrinkDao
+import com.ian.app.drinkings.core.data.local.entity.EntityAlcoholDrink
+import com.ian.app.drinkings.core.data.local.entity.EntityNonAlcoholDrink
 
 /**
  *
