@@ -1,7 +1,7 @@
 package com.ian.app.drinkings.di
 
 import com.google.gson.GsonBuilder
-import com.ian.app.drinkings.data.remote.api.ApiInterface
+import com.ian.app.drinkings.core.data.remote.api.ApiInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
