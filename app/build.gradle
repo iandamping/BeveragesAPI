@@ -123,5 +123,8 @@ dependencies {
     //room
     implementation(libs.room)
     kapt(libs.room.kapt)
+    //turbine
+    testImplementation 'app.cash.turbine:turbine:1.0.0'
+
 
 }

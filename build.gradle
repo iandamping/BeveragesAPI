@@ -55,12 +55,11 @@ subprojects {
                         "*.BR*",
                         "*_MembersInjector*",
                         "com.ian.app.drinkings.MainActivityKt",
-                        "com.ian.app.drinkings.data.local.*",
-                        "com.ian.app.drinkings.data.local.dao.*",
-                        "com.ian.app.drinkings.data.local.entity.*",
+                        "com.ian.app.drinkings.core.data.local.dao.*",
+                        "com.ian.app.drinkings.core.data.local.database.*",
+                        "com.ian.app.drinkings.core.data.local.entity.*",
                         "com.ian.app.drinkings.di.*",
                         "com.ian.app.drinkings.ui.theme.*",
-//                        "com.permatabank.qram.core.base.*"
                 )
             }
         }
@@ -85,7 +84,7 @@ subprojects {
         exclude("**/build/**")
 
         reports {
-            xml.required.set(true)
+            xml.required.set(false)
             html.required.set(true)
             txt.required.set(false)
             sarif.required.set(false)
@@ -101,16 +100,3 @@ tasks.withType(Detekt).configureEach {
 tasks.withType(DetektCreateBaselineTask).configureEach {
     jvmTarget = "1.8"
 }
-
-
-//repositories {
-//    mavenCentral()
-//}
-
-//detekt {
-//    buildUponDefaultConfig = true // preconfigure defaults
-//    allRules = false // activate all available (even unstable) rules.
-//    config.setFrom("$projectDir/config/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
-//    baseline = file("$projectDir/config/baseline.xml") // a way of suppressing issues before introducing detekt
-//}
-
