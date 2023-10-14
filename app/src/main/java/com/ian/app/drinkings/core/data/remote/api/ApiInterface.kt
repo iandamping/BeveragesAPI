@@ -1,6 +1,6 @@
-package com.ian.app.drinkings.data.remote.api
+package com.ian.app.drinkings.core.data.remote.api
 
-import com.ian.app.drinkings.data.remote.model.GeneralDrinkData
+import com.ian.app.drinkings.core.data.remote.model.GeneralDrinkData
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -17,8 +17,8 @@ interface ApiInterface {
     }
 
     @GET(getAlcoholic)
-    suspend fun getAlcoholicDrinks(): Response<GeneralDrinkData<ResponseAlcoholDrink>>
+    suspend fun getAlcoholicDrinks(): Response<GeneralDrinkData<List<ResponseAlcoholDrink>>>
 
     @GET(getNonAlcoholic)
-    suspend fun getNonAlcoholicDrinks(): Response<GeneralDrinkData<ResponseNonAlcoholDrink>>
+    suspend fun getNonAlcoholicDrinks(): Response<GeneralDrinkData<List<ResponseNonAlcoholDrink>>>
 }

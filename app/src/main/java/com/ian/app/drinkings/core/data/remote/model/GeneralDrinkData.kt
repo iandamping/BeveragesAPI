@@ -1,4 +1,4 @@
-package com.ian.app.drinkings.data.remote.model
+package com.ian.app.drinkings.core.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,15 +1,15 @@
-package com.ian.app.drinkings.data.remote
+package com.ian.app.drinkings.core.data.remote
 
 import com.ian.app.drinkings.core.DataSource
-import com.ian.app.drinkings.data.remote.api.ApiInterface
-import com.ian.app.drinkings.data.remote.api.ResponseAlcoholDrink
-import com.ian.app.drinkings.data.remote.api.ResponseNonAlcoholDrink
-import com.ian.app.drinkings.data.remote.model.GeneralDrinkData
+import com.ian.app.drinkings.core.data.remote.api.ApiInterface
+import com.ian.app.drinkings.core.data.remote.api.ResponseAlcoholDrink
+import com.ian.app.drinkings.core.data.remote.api.ResponseNonAlcoholDrink
+import com.ian.app.drinkings.core.data.remote.model.GeneralDrinkData
 import javax.inject.Inject
 
-class RemoteDataSourceImpl @Inject constructor(private val apiInterface: ApiInterface) :
-    RemoteDataSource {
-    override suspend fun getAlcoholicDrinks(): DataSource<GeneralDrinkData<ResponseAlcoholDrink>> {
+class BeverageRemoteDataSourceImpl @Inject constructor(private val apiInterface: ApiInterface) :
+    BeverageRemoteDataSource {
+    override suspend fun getAlcoholicDrinks(): DataSource<GeneralDrinkData<List<ResponseAlcoholDrink>>> {
         return try {
             val data = apiInterface.getAlcoholicDrinks()
             if (data.isSuccessful) {
@@ -30,7 +30,7 @@ class RemoteDataSourceImpl @Inject constructor(private val apiInterface: ApiInte
         }
     }
 
-    override suspend fun getNonAlcoholicDrinks(): DataSource<GeneralDrinkData<ResponseNonAlcoholDrink>> {
+    override suspend fun getNonAlcoholicDrinks(): DataSource<GeneralDrinkData<List<ResponseNonAlcoholDrink>>> {
         return try {
             val data = apiInterface.getNonAlcoholicDrinks()
             if (data.isSuccessful) {

@@ -1,8 +1,8 @@
-package com.ian.app.drinkings.data.remote.api
+package com.ian.app.drinkings.core.data.remote.api
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseNonAlcoholDrink(
+data class ResponseAlcoholDrink(
     @field:SerializedName("idDrink") val idDrink: String?,
     @field:SerializedName("strDrink") val strDrink: String?,
     @field:SerializedName("strCategory") val strDrinkAlternate: String?,
