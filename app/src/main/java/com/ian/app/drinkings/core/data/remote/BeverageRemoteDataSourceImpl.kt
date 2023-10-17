@@ -37,7 +37,12 @@ class BeverageRemoteDataSourceImpl @Inject constructor(private val apiInterface:
             val data = apiInterface.getAlcoholicDrinksById(id)
             if (data.isSuccessful) {
                 if (data.body() != null) {
-                    DataSource.Success(data = checkNotNull(data.body()).cocktailDrinks.first())
+                    val value = checkNotNull(data.body()).cocktailDrinks
+                    if (value != null) {
+                        DataSource.Success(data = value.first())
+                    } else {
+                        DataSource.Error("null")
+                    }
                 } else {
                     DataSource.Error("Error from retrofit : Body null")
                 }
@@ -79,7 +84,12 @@ class BeverageRemoteDataSourceImpl @Inject constructor(private val apiInterface:
             val data = apiInterface.getNonAlcoholicDrinksById(id)
             if (data.isSuccessful) {
                 if (data.body() != null) {
-                    DataSource.Success(data = checkNotNull(data.body()).cocktailDrinks.first())
+                    val value = checkNotNull(data.body()).cocktailDrinks
+                    if (value != null) {
+                        DataSource.Success(data = value.first())
+                    } else {
+                        DataSource.Error("null")
+                    }
                 } else {
                     DataSource.Error("Error from retrofit : Body null")
                 }

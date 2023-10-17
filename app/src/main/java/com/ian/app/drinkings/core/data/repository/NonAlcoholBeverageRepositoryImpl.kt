@@ -22,9 +22,14 @@ class NonAlcoholBeverageRepositoryImpl @Inject constructor(
     override suspend fun getNonAlcoholicDrinks(): DomainSource<List<NonAlcoholDrink>> {
         return when (val data = remoteDataSource.getNonAlcoholicDrinks()) {
             is DataSource.Error -> DomainSource.Error(data.errorMessage)
-            is DataSource.Success -> DomainSource.Success(
-                data.data.cocktailDrinks.map { it.mapRemoteNonAlcoholDrinkToDomain() }
-            )
+            is DataSource.Success ->
+                if (data.data.cocktailDrinks != null) {
+                    DomainSource.Success(
+                        data.data.cocktailDrinks.map { it.mapRemoteNonAlcoholDrinkToDomain() }
+                    )
+                } else {
+                    DomainSource.Error("null data")
+                }
         }
     }
 
