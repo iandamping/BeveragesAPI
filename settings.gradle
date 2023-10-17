@@ -37,7 +37,7 @@ dependencyResolutionManagement {
             version('paging-compose-version', '3.2.0-rc01')
             version('splash-screen-version', '1.0.0')
             version('androidx-core-version', '1.8.0')
-            version('lifecycle-runtime-version', '2.6.1')
+            version('lifecycle-runtime-version', '2.6.2')
             version('constraint-compose-version', '1.0.1')
             version('shimmer-version', '0.5.0')
             version('epoxy-version', '5.1.1')
@@ -46,8 +46,8 @@ dependencyResolutionManagement {
             library('androidx-core', 'androidx.core', 'core-ktx').versionRef('androidx-core-version')
             //androidx-runtime
             library('androidx-lifecycle-runtime', 'androidx.lifecycle', 'lifecycle-runtime').versionRef('lifecycle-runtime-version')
+            library('androidx-lifecycle-compose', 'androidx.lifecycle', 'lifecycle-runtime-compose').versionRef('lifecycle-runtime-version')
             library('androidx-viewmodel-ktx', 'androidx.lifecycle', 'lifecycle-viewmodel-ktx').versionRef('lifecycle-runtime-version')
-
             //activity
             library('activity-compose', 'androidx.activity', 'activity-compose').versionRef('activity-compose-version')
             //viewModel

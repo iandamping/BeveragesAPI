@@ -59,7 +59,8 @@ subprojects {
                         "com.ian.app.drinkings.core.data.local.database.*",
                         "com.ian.app.drinkings.core.data.local.entity.*",
                         "com.ian.app.drinkings.di.*",
-                        "com.ian.app.drinkings.ui.theme.*",
+                        "com.ian.junemon.foodiepedia.ui.theme.*",
+                        "com.ian.app.drinkings.feature.*",
                 )
             }
         }

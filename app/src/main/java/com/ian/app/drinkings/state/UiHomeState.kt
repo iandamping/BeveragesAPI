@@ -1,10 +1,10 @@
 package com.ian.app.drinkings.state
 
-sealed interface UiHomeState {
+sealed interface UiHomeState<out T> {
 
-    data class Success<out T>(val data: T) : UiHomeState
+    data class Success<out T>(val data: T) : UiHomeState<T>
 
-    data class Error(val errorMessage: String) : UiHomeState
+    data class Error(val errorMessage: String) : UiHomeState<Nothing>
 
-    object Loading : UiHomeState
+    object Loading : UiHomeState<Nothing>
 }

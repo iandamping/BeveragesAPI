@@ -2,6 +2,7 @@ package com.ian.app.drinkings.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ian.app.drinkings.core.domain.model.NonAlcoholDrink
 import com.ian.app.drinkings.core.domain.model.common.DomainSource
 import com.ian.app.drinkings.core.domain.repository.NonAlcoholBeverageRepository
 import com.ian.app.drinkings.state.UiHomeState
@@ -18,9 +19,10 @@ class HomeNonAlcoholViewModel @Inject constructor(
     private val nonAlcoholBeverageRepository: NonAlcoholBeverageRepository
 ) : ViewModel() {
 
-    private var _homeNonAlcoholUiState: MutableStateFlow<UiHomeState> =
+    private var _homeNonAlcoholUiState: MutableStateFlow<UiHomeState<List<NonAlcoholDrink>>> =
         MutableStateFlow(UiHomeState.Loading)
-    val homeNonAlcoholUiState: StateFlow<UiHomeState> get() = _homeNonAlcoholUiState.asStateFlow()
+    val homeNonAlcoholUiState: StateFlow<UiHomeState<List<NonAlcoholDrink>>>
+        get() = _homeNonAlcoholUiState.asStateFlow()
 
     init {
         getNonAlcoholData()
