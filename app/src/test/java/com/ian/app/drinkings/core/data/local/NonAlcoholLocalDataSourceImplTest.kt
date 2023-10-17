@@ -29,7 +29,7 @@ class NonAlcoholLocalDataSourceImplTest {
 
     @Test
     fun `NonAlcoholLocalDataSource loadAllNonAlcoholDrinkData should return value`() = runTest {
-        val data = listOf(DummyResponse.DUMMY_ENTITY_NON_ALCOHOL)
+        val data = listOf(DummyResponse.DETAIL_DUMMY_ENTITY_NON_ALCOHOL)
         Mockito.`when`(dao.loadAllNonAlcoholDrinkData()).thenReturn(flowOf(data))
 
         val result = sut.loadAllNonAlcoholDrinkData()
@@ -44,7 +44,7 @@ class NonAlcoholLocalDataSourceImplTest {
 
     @Test
     fun `NonAlcoholLocalDataSource loadAllNonAlcoholDrinkDataById should return value`() = runTest {
-        val data = DummyResponse.DUMMY_ENTITY_NON_ALCOHOL
+        val data = DummyResponse.DETAIL_DUMMY_ENTITY_NON_ALCOHOL
         Mockito.`when`(dao.loadAllNonAlcoholDrinkDataById(mockAny())).thenReturn(flowOf(data))
 
         val result = sut.loadAllNonAlcoholDrinkDataById(1)
@@ -59,7 +59,7 @@ class NonAlcoholLocalDataSourceImplTest {
 
     @Test
     fun `NonAlcoholLocalDataSource updateNonAlcoholDrinkData should run once`() = runTest {
-        val data = DummyResponse.DUMMY_ENTITY_NON_ALCOHOL
+        val data = DummyResponse.DETAIL_DUMMY_ENTITY_NON_ALCOHOL
 
         sut.updateNonAlcoholDrinkData(data)
 

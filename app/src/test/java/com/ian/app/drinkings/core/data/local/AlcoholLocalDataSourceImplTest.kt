@@ -2,7 +2,7 @@ package com.ian.app.drinkings.core.data.local
 
 import app.cash.turbine.test
 import com.ian.app.drinkings.core.data.local.dao.AlcoholDrinkDao
-import com.ian.app.drinkings.model.DummyResponse.DUMMY_ENTITY_ALCOHOL
+import com.ian.app.drinkings.model.DummyResponse.DETAIL_DUMMY_ENTITY_ALCOHOL
 import com.ian.app.drinkings.util.mockAny
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -29,7 +29,7 @@ class AlcoholLocalDataSourceImplTest {
 
     @Test
     fun `AlcoholLocalDataSource loadAllAlcoholDrinkData should return value`() = runTest {
-        val data = listOf(DUMMY_ENTITY_ALCOHOL)
+        val data = listOf(DETAIL_DUMMY_ENTITY_ALCOHOL)
         Mockito.`when`(dao.loadAllAlcoholDrinkData()).thenReturn(flowOf(data))
 
         val result = sut.loadAllAlcoholDrinkData()
@@ -44,7 +44,7 @@ class AlcoholLocalDataSourceImplTest {
 
     @Test
     fun `AlcoholLocalDataSource loadAllAlcoholDrinkDataById should return value`() = runTest {
-        val data = DUMMY_ENTITY_ALCOHOL
+        val data = DETAIL_DUMMY_ENTITY_ALCOHOL
         Mockito.`when`(dao.loadAllAlcoholDrinkDataById(mockAny())).thenReturn(flowOf(data))
 
         val result = sut.loadAllAlcoholDrinkDataById(1)
@@ -59,7 +59,7 @@ class AlcoholLocalDataSourceImplTest {
 
     @Test
     fun `AlcoholLocalDataSource updateAlcoholDrinkData should run once`() = runTest {
-        val data = DUMMY_ENTITY_ALCOHOL
+        val data = DETAIL_DUMMY_ENTITY_ALCOHOL
 
         sut.updateAlcoholDrinkData(data)
 
