@@ -1,6 +1,7 @@
 package com.ian.app.drinkings.core.domain.repository
 
 import com.ian.app.drinkings.core.domain.model.AlcoholDrink
+import com.ian.app.drinkings.core.domain.model.DetailAlcoholDrink
 import com.ian.app.drinkings.core.domain.model.common.DomainSource
 import kotlinx.coroutines.flow.Flow
 
@@ -8,13 +9,15 @@ interface AlcoholBeverageRepository {
 
     suspend fun getAlcoholicDrinks(): DomainSource<List<AlcoholDrink>>
 
-    fun loadAllAlcoholDrinkData(): Flow<List<AlcoholDrink>>
+    suspend fun getAlcoholicDrinksById(id: Int): DomainSource<DetailAlcoholDrink>
 
-    fun loadAllAlcoholDrinkDataById(id: Int): Flow<AlcoholDrink>
+    fun loadDetailAllAlcoholDrinkData(): Flow<List<DetailAlcoholDrink>>
 
-    fun insertAlcoholDrinkData(inputDrinkData: List<AlcoholDrink>)
+    fun loadDetailAllAlcoholDrinkDataById(id: Int): Flow<DetailAlcoholDrink>
 
-    fun updateAlcoholDrinkData(updateDrinkData: AlcoholDrink)
+    fun insertDetailAlcoholDrinkData(inputDrinkData: List<DetailAlcoholDrink>)
 
-    fun deleteAllAlcoholDrinkData()
+    fun updateDetailAlcoholDrinkData(updateDrinkData: DetailAlcoholDrink)
+
+    fun deleteAllDetailAlcoholDrinkData()
 }
