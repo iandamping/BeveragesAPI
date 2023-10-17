@@ -1,17 +1,17 @@
 package com.ian.app.drinkings.core.data.local
 
-import com.ian.app.drinkings.core.data.local.entity.EntityAlcoholDrink
+import com.ian.app.drinkings.core.data.local.entity.EntityDetailAlcoholDrink
 import kotlinx.coroutines.flow.Flow
 
 interface AlcoholLocalDataSource {
 
-    fun loadAllAlcoholDrinkData(): Flow<List<EntityAlcoholDrink>>
+    fun loadAllAlcoholDrinkData(): Flow<List<EntityDetailAlcoholDrink>>
 
-    fun loadAllAlcoholDrinkDataById(id: Int): Flow<EntityAlcoholDrink>
+    fun loadAllAlcoholDrinkDataById(id: Int): Flow<EntityDetailAlcoholDrink>
 
-    fun insertAlcoholDrinkData(inputDrinkData: List<EntityAlcoholDrink>)
+    fun insertAlcoholDrinkData(inputDrinkData: List<EntityDetailAlcoholDrink>)
 
-    fun updateAlcoholDrinkData(updateDrinkData: EntityAlcoholDrink)
+    fun updateAlcoholDrinkData(updateDrinkData: EntityDetailAlcoholDrink)
 
     fun deleteAllAlcoholDrinkData()
 }

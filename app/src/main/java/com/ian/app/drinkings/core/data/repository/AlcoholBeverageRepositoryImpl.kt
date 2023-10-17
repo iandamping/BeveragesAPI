@@ -4,6 +4,7 @@ import com.ian.app.drinkings.core.DataSource
 import com.ian.app.drinkings.core.data.local.AlcoholLocalDataSource
 import com.ian.app.drinkings.core.data.remote.BeverageRemoteDataSource
 import com.ian.app.drinkings.core.domain.model.AlcoholDrink
+import com.ian.app.drinkings.core.domain.model.DetailAlcoholDrink
 import com.ian.app.drinkings.core.domain.model.common.DomainSource
 import com.ian.app.drinkings.core.domain.model.mapper.mapAlcoholDrinkToData
 import com.ian.app.drinkings.core.domain.model.mapper.mapLocalAlcoholDrinkToDomain
@@ -27,25 +28,34 @@ class AlcoholBeverageRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun loadAllAlcoholDrinkData(): Flow<List<AlcoholDrink>> {
+    override suspend fun getAlcoholicDrinksById(id: Int): DomainSource<DetailAlcoholDrink> {
+        return when (val data = remoteDataSource.getAlcoholicDrinksById(id)) {
+            is DataSource.Error -> DomainSource.Error(data.errorMessage)
+            is DataSource.Success -> DomainSource.Success(
+                data.data.mapRemoteAlcoholDrinkToDomain()
+            )
+        }
+    }
+
+    override fun loadDetailAllAlcoholDrinkData(): Flow<List<DetailAlcoholDrink>> {
         return localDataSource.loadAllAlcoholDrinkData()
             .map { data -> data.map { it.mapLocalAlcoholDrinkToDomain() } }
     }
 
-    override fun loadAllAlcoholDrinkDataById(id: Int): Flow<AlcoholDrink> {
+    override fun loadDetailAllAlcoholDrinkDataById(id: Int): Flow<DetailAlcoholDrink> {
         return localDataSource.loadAllAlcoholDrinkDataById(id)
             .map { it.mapLocalAlcoholDrinkToDomain() }
     }
 
-    override fun insertAlcoholDrinkData(inputDrinkData: List<AlcoholDrink>) {
+    override fun insertDetailAlcoholDrinkData(inputDrinkData: List<DetailAlcoholDrink>) {
         localDataSource.insertAlcoholDrinkData(inputDrinkData.map { it.mapAlcoholDrinkToData() })
     }
 
-    override fun updateAlcoholDrinkData(updateDrinkData: AlcoholDrink) {
+    override fun updateDetailAlcoholDrinkData(updateDrinkData: DetailAlcoholDrink) {
         localDataSource.updateAlcoholDrinkData(updateDrinkData.mapAlcoholDrinkToData())
     }
 
-    override fun deleteAllAlcoholDrinkData() {
+    override fun deleteAllDetailAlcoholDrinkData() {
         localDataSource.deleteAllAlcoholDrinkData()
     }
 }

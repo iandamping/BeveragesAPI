@@ -3,8 +3,8 @@ package com.ian.app.drinkings.core.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "non_alchohol_drink")
-data class EntityNonAlcoholDrink(
+@Entity(tableName = "alchohol_drink")
+data class EntityDetailAlcoholDrink(
     @PrimaryKey(autoGenerate = true) var localDrinkId: Int?,
     val remoteIdDrink: String?,
     val strDrink: String?,
@@ -12,6 +12,8 @@ data class EntityNonAlcoholDrink(
     val strCategory: String?,
     val strArea: String?,
     val strInstructions: String?,
+    val strDrinkThumb: String?,
+    val strImageSource: String?,
     val strIngredient1: String?,
     val strIngredient2: String?,
     val strIngredient3: String?,
