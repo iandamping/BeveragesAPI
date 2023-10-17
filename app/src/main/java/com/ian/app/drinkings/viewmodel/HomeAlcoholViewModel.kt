@@ -1,14 +1,15 @@
 package com.ian.app.drinkings.viewmodel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ian.app.drinkings.core.domain.model.common.DomainSource
 import com.ian.app.drinkings.core.domain.repository.AlcoholBeverageRepository
 import com.ian.app.drinkings.state.UiHomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,16 +18,25 @@ class HomeAlcoholViewModel @Inject constructor(
     private val alcoholBeverageRepository: AlcoholBeverageRepository,
 ) : ViewModel() {
 
-    var homeAlcoholUiState: UiHomeState by mutableStateOf(UiHomeState.Loading)
-        private set
+    private var _homeAlcoholUiState: MutableStateFlow<UiHomeState> =
+        MutableStateFlow(UiHomeState.Loading)
+    val homeAlcoholUiState: StateFlow<UiHomeState> get() = _homeAlcoholUiState.asStateFlow()
 
     init {
+        getAlcoholData()
+    }
+
+    fun getAlcoholData() {
         viewModelScope.launch {
-            homeAlcoholUiState =
-                when (val data = alcoholBeverageRepository.getAlcoholicDrinks()) {
-                    is DomainSource.Error -> UiHomeState.Error(data.errorMessage)
-                    is DomainSource.Success -> UiHomeState.Success(data.data)
+            when (val data = alcoholBeverageRepository.getAlcoholicDrinks()) {
+                is DomainSource.Error -> _homeAlcoholUiState.update {
+                    UiHomeState.Error(data.errorMessage)
                 }
+
+                is DomainSource.Success -> _homeAlcoholUiState.update {
+                    UiHomeState.Success(data.data)
+                }
+            }
         }
     }
 }
