@@ -60,20 +60,44 @@ class AlcoholBeverageRepositoryImplTest {
     }
 
     @Test
+    fun `AlcoholBeverageRepository getAlcoholicDrinksById should return success`() = runTest {
+        val remoteData =
+            DataSource.Success(DummyResponse.DETAIL_DUMMY_ALCOHOL)
+        Mockito.`when`(remoteDataSource.getAlcoholicDrinksById(mockAny())).thenReturn(remoteData)
+
+        val result = sut.getAlcoholicDrinksById(1)
+
+        Mockito.verify(remoteDataSource, Mockito.times(1)).getAlcoholicDrinksById(mockAny())
+        Assert.assertEquals(DomainSource.Success(DummyResponse.DETAIL_DUMMY_DOMAIN_ALCOHOL), result)
+    }
+
+    @Test
+    fun `AlcoholBeverageRepository getAlcoholicDrinksById should return error`() = runTest {
+        val remoteData =
+            DataSource.Error("error")
+        Mockito.`when`(remoteDataSource.getAlcoholicDrinksById(mockAny())).thenReturn(remoteData)
+
+        val result = sut.getAlcoholicDrinksById(1)
+
+        Mockito.verify(remoteDataSource, Mockito.times(1)).getAlcoholicDrinksById(mockAny())
+        Assert.assertEquals(DomainSource.Error("error"), result)
+    }
+
+    @Test
     fun `AlcoholBeverageRepository loadAllAlcoholDrinkData should return success`() =
         runTest {
-            val localData = listOf(DummyResponse.DUMMY_ENTITY_ALCOHOL)
+            val localData = listOf(DummyResponse.DETAIL_DUMMY_ENTITY_ALCOHOL)
 
             Mockito.`when`(localDataSource.loadAllAlcoholDrinkData())
                 .thenReturn(flowOf(localData))
 
-            val result = sut.loadAllAlcoholDrinkData()
+            val result = sut.loadDetailAllAlcoholDrinkData()
 
             Mockito.verify(localDataSource, Mockito.times(1)).loadAllAlcoholDrinkData()
 
             result.test {
                 val state = awaitItem()
-                Assert.assertEquals(listOf(DummyResponse.DUMMY_DOMAIN_ALCOHOL), state)
+                Assert.assertEquals(listOf(DummyResponse.DETAIL_DUMMY_DOMAIN_ALCOHOL), state)
                 awaitComplete()
             }
         }
@@ -81,19 +105,19 @@ class AlcoholBeverageRepositoryImplTest {
     @Test
     fun `AlcoholBeverageRepository loadAllAlcoholDrinkDataById should return success`() =
         runTest {
-            val localData = DummyResponse.DUMMY_ENTITY_ALCOHOL
+            val localData = DummyResponse.DETAIL_DUMMY_ENTITY_ALCOHOL
 
             Mockito.`when`(localDataSource.loadAllAlcoholDrinkDataById(mockAny()))
                 .thenReturn(flowOf(localData))
 
-            val result = sut.loadAllAlcoholDrinkDataById(1)
+            val result = sut.loadDetailAllAlcoholDrinkDataById(1)
 
             Mockito.verify(localDataSource, Mockito.times(1))
                 .loadAllAlcoholDrinkDataById(mockAny())
 
             result.test {
                 val state = awaitItem()
-                Assert.assertEquals(DummyResponse.DUMMY_DOMAIN_ALCOHOL, state)
+                Assert.assertEquals(DummyResponse.DETAIL_DUMMY_DOMAIN_ALCOHOL, state)
                 awaitComplete()
             }
         }
@@ -101,7 +125,7 @@ class AlcoholBeverageRepositoryImplTest {
     @Test
     fun `AlcoholBeverageRepository updateAlcoholDrinkData should run once`() =
         runTest {
-            sut.updateAlcoholDrinkData(DummyResponse.DUMMY_DOMAIN_ALCOHOL)
+            sut.updateDetailAlcoholDrinkData(DummyResponse.DETAIL_DUMMY_DOMAIN_ALCOHOL)
 
             Mockito.verify(localDataSource, Mockito.times(1))
                 .updateAlcoholDrinkData(mockAny())
@@ -110,7 +134,7 @@ class AlcoholBeverageRepositoryImplTest {
     @Test
     fun `AlcoholBeverageRepository deleteAllAlcoholDrinkData should run once`() =
         runTest {
-            sut.deleteAllAlcoholDrinkData()
+            sut.deleteAllDetailAlcoholDrinkData()
 
             Mockito.verify(localDataSource, Mockito.times(1))
                 .deleteAllAlcoholDrinkData()
