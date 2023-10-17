@@ -1,14 +1,25 @@
 package com.ian.app.drinkings.model
 
-import com.ian.app.drinkings.core.data.local.entity.EntityAlcoholDrink
-import com.ian.app.drinkings.core.data.local.entity.EntityNonAlcoholDrink
+import com.ian.app.drinkings.core.data.local.entity.EntityDetailAlcoholDrink
+import com.ian.app.drinkings.core.data.local.entity.EntityDetailNonAlcoholDrink
 import com.ian.app.drinkings.core.data.remote.api.ResponseAlcoholDrink
+import com.ian.app.drinkings.core.data.remote.api.ResponseDetailAlcoholDrink
+import com.ian.app.drinkings.core.data.remote.api.ResponseDetailNonAlcoholDrink
 import com.ian.app.drinkings.core.data.remote.api.ResponseNonAlcoholDrink
 import com.ian.app.drinkings.core.domain.model.AlcoholDrink
+import com.ian.app.drinkings.core.domain.model.DetailAlcoholDrink
+import com.ian.app.drinkings.core.domain.model.DetailNonAlcoholDrink
 import com.ian.app.drinkings.core.domain.model.NonAlcoholDrink
 
 object DummyResponse {
-    val DUMMY_ALCOHOL: ResponseAlcoholDrink = ResponseAlcoholDrink(
+    val DUMMY_ALCOHOL: ResponseAlcoholDrink = ResponseAlcoholDrink("a", "a", "a",)
+    val DUMMY_DOMAIN_ALCOHOL: AlcoholDrink = AlcoholDrink("a", "a", "a",)
+    val DUMMY_NON_ALCOHOL: ResponseNonAlcoholDrink = ResponseNonAlcoholDrink("a", "a", "a",)
+    val DUMMY_DOMAIN_NON_ALCOHOL: NonAlcoholDrink = NonAlcoholDrink("a", "a", "a",)
+
+    val DETAIL_DUMMY_ALCOHOL: ResponseDetailAlcoholDrink = ResponseDetailAlcoholDrink(
+        "a",
+        "a",
         "a",
         "a",
         "a",
@@ -47,7 +58,7 @@ object DummyResponse {
         "a"
     )
 
-    val DUMMY_ENTITY_ALCOHOL: EntityAlcoholDrink = EntityAlcoholDrink(
+    val DETAIL_DUMMY_ENTITY_ALCOHOL: EntityDetailAlcoholDrink = EntityDetailAlcoholDrink(
         1,
         "a",
         "a",
@@ -84,88 +95,94 @@ object DummyResponse {
         "a",
         "a",
         "a",
-        "a"
-    )
-
-    val DUMMY_DOMAIN_ALCOHOL: AlcoholDrink = AlcoholDrink(
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-    )
-
-    val DUMMY_NON_ALCOHOL: ResponseNonAlcoholDrink = ResponseNonAlcoholDrink(
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
-        "a",
         "a",
         "a",
         "a"
     )
 
-    val DUMMY_ENTITY_NON_ALCOHOL: EntityNonAlcoholDrink = EntityNonAlcoholDrink(
+    val DETAIL_DUMMY_DOMAIN_ALCOHOL: DetailAlcoholDrink = DetailAlcoholDrink(
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+    )
+
+    val DETAIL_DUMMY_NON_ALCOHOL: ResponseDetailNonAlcoholDrink = ResponseDetailNonAlcoholDrink(
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a"
+    )
+
+    val DETAIL_DUMMY_ENTITY_NON_ALCOHOL: EntityDetailNonAlcoholDrink = EntityDetailNonAlcoholDrink(
         1,
         "a",
         "a",
@@ -202,10 +219,14 @@ object DummyResponse {
         "a",
         "a",
         "a",
+        "a",
+        "a",
         "a"
     )
 
-    val DUMMY_DOMAIN_NON_ALCOHOL: NonAlcoholDrink = NonAlcoholDrink(
+    val DETAIL_DUMMY_DOMAIN_NON_ALCOHOL: DetailNonAlcoholDrink = DetailNonAlcoholDrink(
+        "a",
+        "a",
         "a",
         "a",
         "a",

@@ -17,7 +17,7 @@ import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class HomeSuccessNonAlcoholViewModelTest {
+class HomeNonAlcoholViewModelTest {
 
     @get:Rule
     val mainDispatcherRule = MainCoroutineScopeRule()
@@ -25,25 +25,49 @@ class HomeSuccessNonAlcoholViewModelTest {
     @Mock
     private lateinit var nonAlcoholBeverageRepository: NonAlcoholBeverageRepository
 
-    private val domainData = listOf(DummyResponse.DUMMY_DOMAIN_NON_ALCOHOL)
-
     private lateinit var sut: HomeNonAlcoholViewModel
 
     @Before
     fun setup() = runTest {
         // Arrange
-        Mockito.`when`(nonAlcoholBeverageRepository.getNonAlcoholicDrinks())
-            .thenReturn(DomainSource.Success(domainData))
         sut = HomeNonAlcoholViewModel(nonAlcoholBeverageRepository)
     }
 
     @Test
     fun `HomeViewModel homeNonAlcoholUiState should return Success`() = runTest {
         // Act
+        val domainData = listOf(DummyResponse.DUMMY_DOMAIN_NON_ALCOHOL)
         val currentUiState = sut.homeNonAlcoholUiState
 
+        assertEquals(UiHomeState.Loading, currentUiState.value)
+
+        Mockito.`when`(
+            nonAlcoholBeverageRepository.getNonAlcoholicDrinks()
+        ).thenReturn(DomainSource.Success(domainData))
+
+        sut.getNonAlcoholData()
+
         // Assert
-        assertEquals(UiHomeState.Success(domainData), currentUiState)
-        assertNotEquals(UiHomeState.Loading, currentUiState)
+        assertEquals(UiHomeState.Success(domainData), currentUiState.value)
+        assertNotEquals(UiHomeState.Loading, currentUiState.value)
+    }
+
+    @Test
+    fun `HomeViewModel homeNonAlcoholUiState should return Error`() = runTest {
+        // Act
+        val domainData = "error"
+        val currentUiState = sut.homeNonAlcoholUiState
+
+        assertEquals(UiHomeState.Loading, currentUiState.value)
+
+        Mockito.`when`(
+            nonAlcoholBeverageRepository.getNonAlcoholicDrinks()
+        ).thenReturn(DomainSource.Error(domainData))
+
+        sut.getNonAlcoholData()
+
+        // Assert
+        assertEquals(UiHomeState.Error(domainData), currentUiState.value)
+        assertNotEquals(UiHomeState.Loading, currentUiState.value)
     }
 }
