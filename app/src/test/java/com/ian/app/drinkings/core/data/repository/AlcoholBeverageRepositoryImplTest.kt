@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import com.ian.app.drinkings.core.DataSource
 import com.ian.app.drinkings.core.data.local.AlcoholLocalDataSource
 import com.ian.app.drinkings.core.data.remote.BeverageRemoteDataSource
+import com.ian.app.drinkings.core.data.remote.api.ResponseAlcoholDrink
 import com.ian.app.drinkings.core.data.remote.model.GeneralDrinkData
 import com.ian.app.drinkings.core.domain.model.common.DomainSource
 import com.ian.app.drinkings.core.domain.repository.AlcoholBeverageRepository
@@ -45,6 +46,18 @@ class AlcoholBeverageRepositoryImplTest {
 
         Mockito.verify(remoteDataSource, Mockito.times(1)).getAlcoholicDrinks()
         Assert.assertEquals(DomainSource.Success(listOf(DummyResponse.DUMMY_DOMAIN_ALCOHOL)), result)
+    }
+
+    @Test
+    fun `AlcoholBeverageRepository getAlcoholicDrinks should return error from null data`() = runTest {
+        val remoteData =
+            DataSource.Success(GeneralDrinkData<List<ResponseAlcoholDrink>>(null))
+        Mockito.`when`(remoteDataSource.getAlcoholicDrinks()).thenReturn(remoteData)
+
+        val result = sut.getAlcoholicDrinks()
+
+        Mockito.verify(remoteDataSource, Mockito.times(1)).getAlcoholicDrinks()
+        Assert.assertEquals(DomainSource.Error("null data"), result)
     }
 
     @Test

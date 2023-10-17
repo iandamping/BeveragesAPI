@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import com.ian.app.drinkings.core.DataSource
 import com.ian.app.drinkings.core.data.local.NonAlcoholLocalDataSource
 import com.ian.app.drinkings.core.data.remote.BeverageRemoteDataSource
+import com.ian.app.drinkings.core.data.remote.api.ResponseNonAlcoholDrink
 import com.ian.app.drinkings.core.data.remote.model.GeneralDrinkData
 import com.ian.app.drinkings.core.domain.model.common.DomainSource
 import com.ian.app.drinkings.core.domain.repository.NonAlcoholBeverageRepository
@@ -48,7 +49,19 @@ class NonAlcoholBeverageRepositoryImplTest {
     }
 
     @Test
-    fun `NonAlcoholBeverageRepository getAlcoholicDrinks should return error`() = runTest {
+    fun `NonAlcoholBeverageRepository getNonAlcoholicDrinks should return error from null data`() = runTest {
+        val remoteData =
+            DataSource.Success(GeneralDrinkData<List<ResponseNonAlcoholDrink>>(null))
+        Mockito.`when`(remoteDataSource.getNonAlcoholicDrinks()).thenReturn(remoteData)
+
+        val result = sut.getNonAlcoholicDrinks()
+
+        Mockito.verify(remoteDataSource, Mockito.times(1)).getNonAlcoholicDrinks()
+        assertEquals(DomainSource.Error("null data"), result)
+    }
+
+    @Test
+    fun `NonAlcoholBeverageRepository getNonAlcoholicDrinks should return error`() = runTest {
         val remoteData =
             DataSource.Error("error")
         Mockito.`when`(remoteDataSource.getNonAlcoholicDrinks()).thenReturn(remoteData)
@@ -58,7 +71,6 @@ class NonAlcoholBeverageRepositoryImplTest {
         Mockito.verify(remoteDataSource, Mockito.times(1)).getNonAlcoholicDrinks()
         assertEquals(DomainSource.Error("error"), result)
     }
-
 
     @Test
     fun `NonAlcoholBeverageRepository getNonAlcoholicDrinksById should return success`() = runTest {

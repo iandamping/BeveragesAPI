@@ -1,12 +1,9 @@
-package com.ian.app.drinkings.data.remote
+package com.ian.app.drinkings.core.data.remote
 
 import com.ian.app.drinkings.core.DataSource
-import com.ian.app.drinkings.core.data.remote.BeverageRemoteDataSource
-import com.ian.app.drinkings.core.data.remote.BeverageRemoteDataSourceImpl
 import com.ian.app.drinkings.core.data.remote.api.ApiInterface
 import com.ian.app.drinkings.core.data.remote.model.GeneralDrinkData
 import com.ian.app.drinkings.model.DummyResponse
-import com.ian.app.drinkings.util.mockAny
 import kotlinx.coroutines.test.runTest
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -20,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Response
 
 @RunWith(MockitoJUnitRunner::class)
-class BeverageRemoteDataSourceImplDetailTest {
+class BeverageRemoteDataSourceImplTest {
 
     private lateinit var sut: BeverageRemoteDataSource
 
@@ -33,32 +30,32 @@ class BeverageRemoteDataSourceImplDetailTest {
     }
 
     @Test
-    fun `when RemoteDataSource getAlcoholicDrinksById() return Success`() = runTest {
-        val data = DummyResponse.DETAIL_DUMMY_ALCOHOL
-        Mockito.`when`(apiInterface.getAlcoholicDrinksById(mockAny())).thenReturn(
+    fun `when RemoteDataSource getAlcoholicDrinks() return Success`() = runTest {
+        val data = GeneralDrinkData(listOf(DummyResponse.DUMMY_ALCOHOL))
+        Mockito.`when`(apiInterface.getAlcoholicDrinks()).thenReturn(
             Response.success(
-                GeneralDrinkData(listOf(data))
+                data
             )
         )
 
-        val result = sut.getAlcoholicDrinksById(1)
-        Mockito.verify(apiInterface, Mockito.times(1)).getAlcoholicDrinksById(1)
+        val result = sut.getAlcoholicDrinks()
+        Mockito.verify(apiInterface, Mockito.times(1)).getAlcoholicDrinks()
 
         assertEquals(DataSource.Success(data), result)
     }
 
     @Test
-    fun `when RemoteDataSource getAlcoholicDrinksById() return Error`() = runTest {
-        Mockito.`when`(apiInterface.getAlcoholicDrinksById(mockAny())).thenReturn(
+    fun `when RemoteDataSource getAlcoholicDrinks() return Error`() = runTest {
+        Mockito.`when`(apiInterface.getAlcoholicDrinks()).thenReturn(
             Response.error(
                 404,
                 "{\"message\":\"Not Found\"}".toResponseBody("text/plain".toMediaType())
             )
         )
 
-        val result = sut.getAlcoholicDrinksById(1)
+        val result = sut.getAlcoholicDrinks()
 
-        Mockito.verify(apiInterface, Mockito.times(1)).getAlcoholicDrinksById(mockAny())
+        Mockito.verify(apiInterface, Mockito.times(1)).getAlcoholicDrinks()
         assertEquals(
             DataSource.Error(
                 "Error from retrofit Http Code is not 200 .. 300 with message : {\"message\":\"Not Found\"}"
@@ -68,28 +65,27 @@ class BeverageRemoteDataSourceImplDetailTest {
     }
 
     @Test
-    fun `when RemoteDataSource getAlcoholicDrinksById() return null Body`() = runTest {
-        Mockito.`when`(apiInterface.getAlcoholicDrinksById(mockAny())).thenReturn(
+    fun `when RemoteDataSource getAlcoholicDrinks() return null Body`() = runTest {
+        Mockito.`when`(apiInterface.getAlcoholicDrinks()).thenReturn(
             Response.success(
                 null
             )
         )
 
-        val result = sut.getAlcoholicDrinksById(1)
+        val result = sut.getAlcoholicDrinks()
 
-        Mockito.verify(apiInterface, Mockito.times(1)).getAlcoholicDrinksById(1)
+        Mockito.verify(apiInterface, Mockito.times(1)).getAlcoholicDrinks()
         assertEquals(DataSource.Error("Error from retrofit : Body null"), result)
     }
 
     @Test
-    fun `when RemoteDataSource getAlcoholicDrinksById() return throw IllegalArgumentException`() =
+    fun `when RemoteDataSource getAlcoholicDrinks() return throw IllegalArgumentException`() =
         runTest {
-            Mockito.`when`(apiInterface.getAlcoholicDrinksById(mockAny()))
-                .thenThrow(IllegalArgumentException())
+            Mockito.`when`(apiInterface.getAlcoholicDrinks()).thenThrow(IllegalArgumentException())
 
-            val result = sut.getAlcoholicDrinksById(1)
+            val result = sut.getAlcoholicDrinks()
 
-            Mockito.verify(apiInterface, Mockito.times(1)).getAlcoholicDrinksById(1)
+            Mockito.verify(apiInterface, Mockito.times(1)).getAlcoholicDrinks()
             assertEquals(DataSource.Error("default error"), result)
         }
 
@@ -145,8 +141,7 @@ class BeverageRemoteDataSourceImplDetailTest {
     @Test
     fun `when RemoteDataSource getNonAlcoholicDrinks() return throw IllegalArgumentException`() =
         runTest {
-            Mockito.`when`(apiInterface.getNonAlcoholicDrinks())
-                .thenThrow(IllegalArgumentException())
+            Mockito.`when`(apiInterface.getNonAlcoholicDrinks()).thenThrow(IllegalArgumentException())
 
             val result = sut.getNonAlcoholicDrinks()
 
